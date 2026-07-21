@@ -240,7 +240,7 @@ with info_col5:
     st.markdown("### 📌 Notas Metodológicas")
     st.markdown(
         """
-        * **Fonte de Dados - Quilombos e aldeias indígenas:** Censo Demográfico IBGE 2022.
+        * **Fonte de Dados - Comunidades quilombolas e aldeias indígenas:** Censo Demográfico IBGE 2022.
         * **Fonte de Dados - Pescadores:** BRASIL. Ministério da Pesca e Aquicultura. Painel Unificado do RGP. Brasília: MPA, [202-]. Disponível em: <https://www.gov.br/mpa/pt-br/assuntos/cadastro-registro-e-monitoramento/painel-unificado-do-registro-geral-da-atividade-pesqueira>. Acesso em: 17 jul. 2026.
         """
     )
