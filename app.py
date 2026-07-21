@@ -111,7 +111,7 @@ fig_pescadores = px.bar(
     df_pescadores, 
     x = 'Pescadores', # Passamos a lista de colunas diretamente no eixo Y
     y='area_influencia',
-    title= 'Total de pescadores: 74.489',
+    title= 'Total de pescadores: 74.668',
     orientation='h',
     color = 'area_influencia',
     color_discrete_map= mapa_de_cores,
@@ -126,14 +126,14 @@ fig_pescadores.update_layout(margin={"r": 0, "t": 20, "l": 0, "b": 0},
                              height=300,
                              bargap=0.0)
 
-# %% 4. GRÁFICO 2: QUANTIDADE DE QUILOMBOS
+# %% 4. GRÁFICO 2: QUANTIDADE DE COM. QUILOMBOLAS
 df_quilombos = df.groupby('area_influencia', as_index=False)['Quilombos'].sum()
 
 fig_quilombos = px.bar( 
     df_quilombos, 
     x='Quilombos', 
     y='area_influencia', 
-    title= 'Total de comunidades quilombolas: 274',
+    title= 'Total de comunidades quilombolas: 283',
     orientation='h',
     color='area_influencia',
     color_discrete_map=mapa_de_cores,
@@ -186,10 +186,10 @@ with info_col1:
     st.markdown("#### 🚣 Pescadores")
     st.markdown(
         """
-        Total de pescadores (74.489) representa **42,1%** do total do estado da Bahia, sendo:  
+        Total de pescadores (74.668) representa **42,2%** do total do estado da Bahia, sendo:  
             * **ADA:** 11%  
             * **AID:** 8%  
-            * **AII:** 23,1%
+            * **AII:** 23,2%
         """
         )
         
@@ -206,10 +206,10 @@ with info_col3:
     st.markdown("##### 🏘️ Comunidades Quilombolas")
     st.markdown(
         """
-        Total de comunidades (274) representa **15%** do total do estado da Bahia, sendo:  
+        Total de comunidades (283) representa **15,6%** do total do estado da Bahia, sendo:  
             * **ADA:** 2,5%  
             * **AID:** 1,2%  
-            * **AII:** 11,3%
+            * **AII:** 11,9%
         """
     )
         
