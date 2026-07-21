@@ -230,9 +230,9 @@ with info_col4:
         Municípios do Estado da Bahia impactados pelo empreendimento.  
         Áreas de Influência classificadas de acordo com Relatório de Impacto Ambiental - RIMA.  
         **Nomenclatura:** 
-        * **ADA:** Área diretamente afetada.
-        * **AID:** Área de influência direta.
-        * **AII:** Área de influência indireta.
+        * **ADA:** Área diretamente afetada. Área necessária para implantação das obras e passível de intervenção física direta.
+        * **AID:** Área de influência direta. Áreas contíguas à ADA, que, apesar de não conterem as obras de infraestrutura, apresentam risco de serem afetadas em função de suas características físicas, bióticas, sociais e econômicas. 
+        * **AII:** Área de influência indireta. Área geográfica onde poderão se refletir as eventuais consequências, impactos ou efeitos induzidos pelo projeto.
         """
     )
 
