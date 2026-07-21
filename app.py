@@ -231,7 +231,7 @@ with info_col4:
         Áreas de Influência classificadas de acordo com Relatório de Impacto Ambiental - RIMA.  
         **Nomenclatura:** 
         * **ADA:** Área diretamente afetada. Área necessária para implantação das obras e passível de intervenção física direta.
-        * **AID:** Área de influência direta. Áreas contíguas à ADA, que, apesar de não conterem as obras de infraestrutura, apresentam risco de serem afetadas em função de suas características físicas, bióticas, sociais e econômicas. 
+        * **AID:** Área de influência direta. Áreas contíguas à ADA,compreende uma faixa de 3.000 m, centrada na diretriz da ponte/rodovia (1.500 de cada lado). Apesar de não conterem as obras de infraestrutura, apresentam risco de serem afetadas em função de suas características físicas, bióticas, sociais e econômicas. 
         * **AII:** Área de influência indireta. Área geográfica onde poderão se refletir as eventuais consequências, impactos ou efeitos induzidos pelo projeto.
         """
     )
