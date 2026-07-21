@@ -25,12 +25,12 @@ st.write("---")
 
 # %% Importando arquivo
 
-tabela = pd.read_csv("dados\dados_tabelados_pescadores.csv",
+tabela = pd.read_csv("dados/dados_tabelados_pescadores.csv",
                      encoding="latin-1",
                      sep=";")
 
 # Carregar a base de dados de coordenadas do Brasil
-cod_municipios = pd.read_csv("dados\municipios.csv",
+cod_municipios = pd.read_csv("dados/municipios.csv",
                      encoding="latin-1",
                      sep = ";")
 
@@ -39,7 +39,7 @@ df_bahia = cod_municipios[cod_municipios['codigo_uf'] == 29].copy()
 
 
 # Carregar o arquivo GeoJSON baixado localmente ---
-with open("dados\geojs-29-mun.json", "r", encoding="utf-8") as f:
+with open("dados/geojs-29-mun.json", "r", encoding="utf-8") as f:
     geojson_bahia = json.load(f)
 
 
