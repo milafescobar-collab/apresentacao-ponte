@@ -18,7 +18,7 @@ pio.renderers.default = 'browser'
 # %% configurando a pagina web
 st.set_page_config(page_title="Meu Dashboard", layout="wide")
 
-st.title("Áreas de Influência - Ponte Salvador Ilha de Itaparica")
+st.title("Áreas de Influência Socioeconômica - Ponte Salvador Ilha de Itaparica")
 st.write("---")
 
 
