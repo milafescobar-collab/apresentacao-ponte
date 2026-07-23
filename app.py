@@ -27,7 +27,7 @@ st.write("---")
 
 tabela = pd.read_csv("dados/dados_tabelados_pescadores.csv",
                      encoding="latin-1",
-                     sep=";")
+                     sep=",")
 
 # Carregar a base de dados de coordenadas do Brasil
 cod_municipios = pd.read_csv("dados/municipios.csv",
