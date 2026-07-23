@@ -98,7 +98,13 @@ fig =  px.choropleth_map(
                   "localidades_indigenas": True,
                   "territorio_identidade": True,
                   "populacao": True,
-                  "urbanizacao": True
+                  "urbanizacao": True,
+                  "IDH_2010": True,
+                  "indice_gini": True,
+                  "beneficiados_PBF": True,
+                  "PIB": True,
+                  "PIB_per_capita": True
+                  
         },
     zoom=5.5,
     center={"lat": -12.97, "lon": -38.50},
