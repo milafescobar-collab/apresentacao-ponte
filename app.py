@@ -78,6 +78,8 @@ categorias_unicas = sorted(df['area_influencia'].unique())
 cores = ['#e15759', '#59a14f', '#4e79a7']
 # Cria o dicionário amarrando cada categoria a uma cor da lista
 mapa_de_cores = {cat: cores[i % len(cores)] for i, cat in enumerate(categorias_unicas)}
+
+
 # %% 2. CONSTRUÇÃO DO MAPA INTERATIVO
 
 fig =  px.choropleth_map(
@@ -93,7 +95,10 @@ fig =  px.choropleth_map(
                   "area_influencia": False,
                   "codigo_ibge": False,
                   "Quilombos": True,
-                  "localidades_indigenas": True
+                  "localidades_indigenas": True,
+                  "territorio_identidade": True,
+                  "populacao": True,
+                  "urbanizacao": True
         },
     zoom=5.5,
     center={"lat": -12.97, "lon": -38.50},
