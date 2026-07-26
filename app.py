@@ -69,7 +69,7 @@ df = pd.merge(
 
 # Remove nulos, converte para inteiro e depois para texto de forma segura
 df['Pescadores'] = df['Pescadores'].fillna(0).astype(int)
-df['Quilombos'] = df['Quilombos'].fillna(0).astype(int)
+df['comunidades_quilombolas'] = df['comunidades_quilombolas'].fillna(0).astype(int)
 #df['texto_mapa'] = df['municipio'] + '<br>' + df['total'].astype(str)
 
 # %%  1. MAPEAMENTO DE CORES CATEGÓRICAS (UNIFICAÇÃO)
@@ -98,7 +98,7 @@ fig =  px.choropleth_map(
     hover_data = {"Pescadores": True,
                   "area_influencia": False,
                   "codigo_ibge": False,
-                  "Quilombos": True,
+                  "comunidades_quilombolas": True,
                   "localidades_indigenas": True,
                   "territorio_identidade": True
                   
@@ -142,13 +142,13 @@ df_quilombos = df.groupby('area_influencia', as_index=False)['Quilombos'].sum()
 
 fig_quilombos = px.bar( 
     df_quilombos, 
-    x='Quilombos', 
+    x='comunidades_quilombolas', 
     y='area_influencia', 
     title= 'Total de comunidades quilombolas: 283',
     orientation='h',
     color='area_influencia',
     color_discrete_map=mapa_de_cores,
-    labels={'area_influencia': 'Área de influência', 'Quilombos': 'Total de Quilombos'},
+    labels={'area_influencia': 'Área de influência', 'comunidades_quilombolas': 'Total de Comunidades Quilombolas'},
     barmode='group',       
     text_auto=True,        
     opacity=0.7  
@@ -172,7 +172,7 @@ fig_mapa_reg =  px.choropleth_map(
     hover_data = {"Pescadores": False,
                   "area_influencia": True,
                   "codigo_ibge": False,
-                  "Quilombos": False,
+                  "comunidades_quilombolas": False,
                   "localidades_indigenas": False,
                   "territorio_identidade": True,
                   "populacao": True,
