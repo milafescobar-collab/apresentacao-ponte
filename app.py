@@ -100,14 +100,7 @@ fig =  px.choropleth_map(
                   "codigo_ibge": False,
                   "Quilombos": True,
                   "localidades_indigenas": True,
-                  "territorio_identidade": True,
-                  "populacao": True,
-                  "urbanizacao": True,
-                  "IDH_2010": True,
-                  "indice_gini": True,
-                  "beneficiados_PBF": True,
-                  "PIB": True,
-                  "PIB_per_capita": True
+                  "territorio_identidade": True
                   
         },
     zoom=5.5,
@@ -176,11 +169,11 @@ fig_mapa_reg =  px.choropleth_map(
     color_discrete_map = mapa_cores_territorio , # Escala degradê de cores para a área
     labels = {'territorio_identidade':'Território de Identidade'},
     hover_name="municipio",
-    hover_data = {"Pescadores": True,
+    hover_data = {"Pescadores": False,
                   "area_influencia": True,
                   "codigo_ibge": False,
-                  "Quilombos": True,
-                  "localidades_indigenas": True,
+                  "Quilombos": False,
+                  "localidades_indigenas": False,
                   "territorio_identidade": True,
                   "populacao": True,
                   "urbanizacao": True,
@@ -308,7 +301,7 @@ with aba_principal:
 with aba_socioeconomica:
     
     # LINHA 1: MAPA EM LARGURA TOTAL
-    st.subheader("Mapa de Distribuição das Áreas de Influência")
+    st.subheader("Mapa de Distribuição dos Territórios de Identidade")
     st.plotly_chart(fig_mapa_reg, use_container_width=True)
     
     st.markdown("<br>", unsafe_allow_html=True) # Espaçamento suave entre linhas
