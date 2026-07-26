@@ -26,7 +26,7 @@ st.write("---")
 # %% Importando arquivo
 
 tabela = pd.read_csv("dados/dados_tabelados_pescadores_2.csv",
-                     encoding="latin-1",
+                     encoding="utf-8",
                      sep=";")
 
 # Remove possíveis espaços extras no nome das colunas
