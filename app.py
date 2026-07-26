@@ -71,6 +71,17 @@ df = pd.merge(
 df['Pescadores'] = df['Pescadores'].fillna(0).astype(int)
 df['comunidades_quilombolas'] = df['comunidades_quilombolas'].fillna(0).astype(int)
 #df['texto_mapa'] = df['municipio'] + '<br>' + df['total'].astype(str)
+df['urbanizacao_perc'] = df['urbanizacao_perc'].str.replace(',', '.').astype(float)
+df['quilombolas_perc'] = df['quilombolas_perc'].str.replace(',', '.').astype(float)
+df['indigenas_perc'] = df['indigenas_perc'].str.replace(',', '.').astype(float)
+df['analfabetismo_perc'] = df['analfabetismo_perc'].str.replace(',', '.').astype(float)
+df['IDH_2010_valor'] = df['IDH_2010_valor'].str.replace(',', '.').astype(float)
+df['beneficiados_PBF_perc'] = df['beneficiados_PBF_perc'].str.replace(',', '.').astype(float)
+df['PIB_valor'] = df['PIB_valor'].str.replace(',', '.').astype(float)
+df['PIB_per_capita_valor'] = df['PIB_per_capita_valor'].str.replace(',', '.').astype(float)
+df['VAB_com_serv_2021'] = df['VAB_com_serv_2021'].str.replace(',', '.').astype(float)
+df['VAB_agro_2021'] = df['VAB_agro_2021'].str.replace(',', '.').astype(float)
+df['VAB_ind_2021'] = df['VAB_ind_2021'].str.replace(',', '.').astype(float)
 
 # %%  1. MAPEAMENTO DE CORES CATEGÓRICAS (UNIFICAÇÃO)
 
