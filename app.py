@@ -116,7 +116,7 @@ fig =  px.choropleth_map(
 
 fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
 
-# %% 3. GRÁFICO 1: QUANTIDADE DE PESCADORES
+# %% 3. GRÁFICO DA QUANTIDADE DE PESCADORES
 
 df_pescadores = df.groupby('area_influencia', as_index = False)['Pescadores'].sum()
 
@@ -140,7 +140,7 @@ fig_pescadores.update_layout(margin={"r": 0, "t": 20, "l": 0, "b": 0},
                              height=300,
                              bargap=0.0)
 
-# %% 4. GRÁFICO 2: QUANTIDADE DE COM. QUILOMBOLAS
+# %% 4. GRÁFICO DA QUANTIDADE DE COM. QUILOMBOLAS
 df_quilombos = df.groupby('area_influencia', as_index=False)['Quilombos'].sum()
 
 fig_quilombos = px.bar( 
@@ -160,6 +160,12 @@ fig_quilombos = px.bar(
 fig_quilombos.update_layout(margin={"r": 0, "t": 20, "l": 0, "b": 0}, 
                             height=300,
                             bargap=0.0)
+
+# %% ==============================================================================
+# CRIAÇÃO DAS ABAS DO STREAMLIT
+# ==============================================================================
+
+aba_principal, aba_socioeconomica = st.tabs(["🗺️ Visão Geral e Comunidades", "📈 Indicadores Socioeconômicos"])
 
 # %% ==============================================================================
 # RENDERIZAÇÃO NO STREAMLIT (DISPOSIÇÃO DAS LINHAS)
