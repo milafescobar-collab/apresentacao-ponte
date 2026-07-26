@@ -138,7 +138,7 @@ fig_pescadores.update_layout(margin={"r": 0, "t": 20, "l": 0, "b": 0},
                              bargap=0.0)
 
 # %% 4. GRÁFICO DA QUANTIDADE DE COM. QUILOMBOLAS
-df_quilombos = df.groupby('area_influencia', as_index=False)['Quilombos'].sum()
+df_quilombos = df.groupby('area_influencia', as_index=False)['comunidades_quilombolas'].sum()
 
 fig_quilombos = px.bar( 
     df_quilombos, 
