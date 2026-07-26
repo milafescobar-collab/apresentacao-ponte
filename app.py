@@ -261,7 +261,16 @@ with aba_principal:
         )
     
     
-
+# ==============================================================================
+# CONTEÚDO DA ABA 2: ANÁLISE SOCIOECONÔMICA (NOVA ABA)
+# ==============================================================================
+with aba_socioeconomica:
+    
+    # LINHA 1: MAPA EM LARGURA TOTAL
+    st.subheader("Mapa de Distribuição das Áreas de Influência")
+    st.plotly_chart(fig_mapa_reg, use_container_width=True)
+    
+    st.markdown("<br>", unsafe_allow_html=True) # Espaçamento suave entre linhas
 
 
 
