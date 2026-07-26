@@ -167,109 +167,102 @@ fig_quilombos.update_layout(margin={"r": 0, "t": 20, "l": 0, "b": 0},
 
 aba_principal, aba_socioeconomica = st.tabs(["🗺️ Visão Geral e Comunidades", "📈 Indicadores Socioeconômicos"])
 
-# %% ==============================================================================
-# RENDERIZAÇÃO NO STREAMLIT (DISPOSIÇÃO DAS LINHAS)
+
+# ==============================================================================
+# CONTEÚDO DA ABA 1: VISÃO GERAL
 # ==============================================================================
 
-# LINHA 1: MAPA EM LARGURA TOTAL
-st.subheader(" Mapa de Distribuição das Áreas de Influência")
-st.plotly_chart(fig, use_container_width=True)
-
-st.markdown("<br>", unsafe_allow_html=True) # Espaçamento suave entre linhas
-
-# LINHA 2: GRÁFICOS DE BARRAS LADO A LADO
-col_barras_1, col_barras_2 = st.columns(2)
-
-with col_barras_1:
-    st.subheader("🚣 Pescadores por Área de Influência")
-    st.plotly_chart(fig_pescadores, width='stretch')
-
-with col_barras_2:
-    st.subheader("🏘️ Comunidades Quilombolas por Área de Influência")
-    st.plotly_chart(fig_quilombos, width='stretch')
+with aba_principal:
+    # LINHA 1: MAPA EM LARGURA TOTAL
+    st.subheader("Mapa de Distribuição das Áreas de Influência")
+    st.plotly_chart(fig, use_container_width=True)
     
+    st.markdown("<br>", unsafe_allow_html=True) # Espaçamento suave entre linhas
     
-# LINHA 3: ESTATÍSTICAS
-st.divider()
+    # LINHA 2: GRÁFICOS DE BARRAS LADO A LADO
+    col_barras_1, col_barras_2 = st.columns(2)
+      
+    with col_barras_1:
+        st.subheader("🚣 Pescadores por Área de Influência")
+        st.plotly_chart(fig_pescadores, use_container_width=True)
+    
+    with col_barras_2:
+        st.subheader("🏘️ Comunidades Quilombolas por Área de Influência")
+        st.plotly_chart(fig_quilombos, use_container_width=True)
 
-# Título adicionado após a linha de separação
-st.subheader("📊 Notas  Estatísticas")
-# st.subheader("📋 Detalhes do Projeto e Fontes de Dados") # Opção alternativa de tamanho
-
-st.markdown("<br>", unsafe_allow_html=True) # Espaçamento suave (opcional)
-
-# Oganização em 3 colunas para notas explicativas e resumo
-info_col1, info_col2, info_col3 = st.columns(3)
-
-
-with info_col1:
-    st.markdown("#### 🚣 Pescadores")
-    st.markdown(
-        """
-        Total de pescadores (74.668) representa **42,2%** do total do estado da Bahia, sendo:  
-            * **ADA:** 11%  
-            * **AID:** 8%  
-            * **AII:** 23,2%
-        """
+      
+    # LINHA 3: NOTAS ESTATÍSTICAS
+    st.divider()
+    
+    # Título adicionado após a linha de separação
+    st.subheader("📊 Notas Estatísticas")
+    
+    st.markdown("<br>", unsafe_allow_html=True) # Espaçamento suave (opcional)
+    
+    # Organização em 3 colunas para notas explicativas e resumo
+    info_col1, info_col2, info_col3 = st.columns(3)
+    
+    with info_col1:
+        st.markdown("#### 🚣 Pescadores")
+        st.markdown(
+            """
+            Total de pescadores (74.668) representa **42,2%** do total do estado da Bahia, sendo:  
+                * **ADA:** 11%  
+                * **AID:** 8%  
+                * **AII:** 23,2%
+            """
+            )
+            
+    with info_col2:
+        st.markdown("##### ⛺ Comunidades Indígenas")
+        st.markdown(
+            """
+            * Total de aldeias indígenas = 4 (2 em Camaçari e 2 em Camamú).  
+            * Representa  **1,1%** do total do estado da Bahia.
+            """
         )
         
-with info_col2:
-    st.markdown("##### ⛺ Comunidades Indígenas")
-    st.markdown(
-        """
-        * Total de aldeias indígenas = 4 (2 em Camaçari e 2 em Camamú).  
-        * Representa  **1,1%** do total do estado da Bahia.
-        """
-    )
+    with info_col3:
+        st.markdown("##### 🏘️ Comunidades Quilombolas")
+        st.markdown(
+            """
+            Total de comunidades (283) representa **15,6%** do total do estado da Bahia, sendo:  
+                * **ADA:** 2,5%  
+                * **AID:** 1,2%  
+                * **AII:** 11,9%
+            """
+        )
+            
+    # LINHA 4: NOTAS DE RODAPÉ
+    st.divider()
     
-with info_col3:
-    st.markdown("##### 🏘️ Comunidades Quilombolas")
-    st.markdown(
-        """
-        Total de comunidades (283) representa **15,6%** do total do estado da Bahia, sendo:  
-            * **ADA:** 2,5%  
-            * **AID:** 1,2%  
-            * **AII:** 11,9%
-        """
-    )
-        
-
-  
-# LINHA 4: NOTAS DE RODAPÉ
-st.divider()
-
-# Organização em 2 colunas para notas explicativas e resumo
-info_col4, info_col5 = st.columns(2)
-
-
-
-with info_col4:
-    st.markdown("### 🌍 Recorte Geográfico")
-    st.markdown(
-        """
-        Municípios do Estado da Bahia impactados pelo empreendimento.  
-        Áreas de Influência classificadas de acordo com Relatório de Impacto Ambiental - RIMA.  
-        **Nomenclatura:** 
-        * **ADA:** Área diretamente afetada. Área necessária para implantação das obras e passível de intervenção física direta.
-        * **AID:** Área de influência direta. Áreas contíguas à ADA,compreende uma faixa de 3.000 m, centrada na diretriz da ponte/rodovia (1.500 de cada lado). Apesar de não conterem as obras de infraestrutura, apresentam risco de serem afetadas em função de suas características físicas, bióticas, sociais e econômicas. 
-        * **AII:** Área de influência indireta. Área geográfica onde poderão se refletir as eventuais consequências, impactos ou efeitos induzidos pelo projeto.
-        """
-    )
-
-with info_col5:
-    st.markdown("### 📌 Notas Metodológicas")
-    st.markdown(
-        """
-        * **Fonte de Dados - Comunidades quilombolas e aldeias indígenas:** Censo Demográfico IBGE 2022.
-        * **Fonte de Dados - Pescadores:** BRASIL. Ministério da Pesca e Aquicultura. Painel Unificado do RGP. Brasília: MPA, [202-]. Disponível em: <https://www.gov.br/mpa/pt-br/assuntos/cadastro-registro-e-monitoramento/painel-unificado-do-registro-geral-da-atividade-pesqueira>. Acesso em: 17 jul. 2026.
-        """
-    )
+    # Organização em 2 colunas para notas explicativas e resumo
+    info_col4, info_col5 = st.columns(2)
+    
+    with info_col4:
+        st.markdown("### 🌍 Recorte Geográfico")
+        st.markdown(
+            """
+            Municípios do Estado da Bahia impactados pelo empreendimento.  
+            Áreas de Influência classificadas de acordo com Relatório de Impacto Ambiental - RIMA.  
+            **Nomenclatura:** 
+            * **ADA:** Área diretamente afetada. Área necessária para implantação das obras e passível de intervenção física direta.
+            * **AID:** Área de influência direta. Áreas contíguas à ADA, compreende uma faixa de 3.000 m, centrada na diretriz da ponte/rodovia (1.500 de cada lado). Apesar de não conterem as obras de infraestrutura, apresentam risco de serem afetadas em função de suas características físicas, bióticas, sociais e econômicas.
+            * **AII:** Área de influência indireta. Área geográfica onde poderão se refletir as eventuais consequências, impactos ou efeitos induzidos pelo projeto.
+            """
+        )
+    with info_col5:
+        st.markdown("### 📌 Notas Metodológicas")
+        st.markdown(
+            """
+            * **Fonte de Dados - Comunidades quilombolas e aldeias indígenas:** Censo Demográfico IBGE 2022.
+            * **Fonte de Dados - Pescadores:** BRASIL. Ministério da Pesca e Aquicultura. Painel Unificado do RGP. Brasília: MPA, [202-]. Disponível em: <https://www.gov.br/mpa/pt-br/assuntos/cadastro-registro-e-monitoramento/painel-unificado-do-registro-geral-da-atividade-pesqueira>. Acesso em: 17 jul. 2026.
+            """
+        )
+    
+    
 
 
-
-# %% Rodar no Anaconda Prompt:
-## cd C:\Users\camila.escobar\OneDrive - mtegovbr\Documentos\AEPIT\ponte Salvador-Itaparica\Informações MTE subsídio Ministro
-## streamlit run app_2.py
 
 
 
