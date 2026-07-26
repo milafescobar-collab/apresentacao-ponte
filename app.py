@@ -80,7 +80,7 @@ cores = ['#e15759', '#59a14f', '#4e79a7']
 mapa_de_cores = {cat: cores[i % len(cores)] for i, cat in enumerate(categorias_unicas)}
 
 categorias_unicas_terrtorio = sorted(df['territorio_identidade'].unique())
-cores_territorio = ['#EB852F', '#384B43', '#B85723', '#FDBD59']
+cores_territorio = ['#5B2260', '#384B43', '#B85723', '#FDBD59']
 mapa_cores_territorio = {cat: cores_territorio[i % len(cores_territorio)] for i, cat in enumerate(categorias_unicas_terrtorio)}
 
 
