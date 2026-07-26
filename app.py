@@ -79,6 +79,10 @@ cores = ['#e15759', '#59a14f', '#4e79a7']
 # Cria o dicionário amarrando cada categoria a uma cor da lista
 mapa_de_cores = {cat: cores[i % len(cores)] for i, cat in enumerate(categorias_unicas)}
 
+categorias_unicas_terrtorio = sorted(df['territorio_identidade'].unique())
+cores_territorio = ['#EB852F', '#384B43', '#B85723', '#FDBD59']
+mapa_cores_territorio = {cat: cores_territorio[i % len(cores_territorio)] for i, cat in enumerate(categorias_unicas_terrtorio)}
+
 
 # %% 2. CONSTRUÇÃO DO MAPA INTERATIVO
 
@@ -160,6 +164,43 @@ fig_quilombos = px.bar(
 fig_quilombos.update_layout(margin={"r": 0, "t": 20, "l": 0, "b": 0}, 
                             height=300,
                             bargap=0.0)
+
+# %% 5. CONSTRUÇÃO DO MAPA INTERATIVO COM AS REGIÕES SOCIOECONOMICAS
+
+fig_mapa_reg =  px.choropleth_map(
+    df, 
+   geojson=geojson_bahia,
+    locations="codigo_ibge",       # Coluna que serve de chave no seu DataFrame
+    featureidkey="properties.id",  # Chave correspondente dentro da estrutura do GeoJSON
+    color="territorio_identidade",                # Coluna numérica que define a intensidade da cor
+    color_discrete_map = mapa_cores_territorio , # Escala degradê de cores para a área
+    labels = {'territorio_identidade':'Território de Identidade'},
+    hover_name="municipio",
+    hover_data = {"Pescadores": True,
+                  "area_influencia": True,
+                  "codigo_ibge": False,
+                  "Quilombos": True,
+                  "localidades_indigenas": True,
+                  "territorio_identidade": True,
+                  "populacao": True,
+                  "urbanizacao": True,
+                  "IDH_2010": True,
+                  "indice_gini": True,
+                  "beneficiados_PBF": True,
+                  "PIB": True,
+                  "PIB_per_capita": True
+                  
+        },
+    zoom=5.5,
+    center={"lat": -12.97, "lon": -38.50},
+    map_style="open-street-map",   # Motor livre atualizado do Plotly
+    opacity=0.7                    # Transparência para ver ruas e nomes sob as cores
+)
+
+
+
+fig_mapa_reg.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
+
 
 # %% ==============================================================================
 # CRIAÇÃO DAS ABAS DO STREAMLIT
