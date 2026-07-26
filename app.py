@@ -204,24 +204,8 @@ fig_mapa_reg =  px.choropleth_map(
 
 fig_mapa_reg.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
 
-# %% 6. TREEMAP com PIB - território identidade
 
-
-fig_tm_PIB = px.treemap(
-    df,
-    path = ['municipio', 'PIB'],
-    values = 'PIB_valor', 
-    color = 'territorio_identidade',
-    color_discrete_map = mapa_cores_territorio,
-    hover_data={
-        'PIB': False,
-        'area_influencia': True
-    })
-
-fig_tm_PIB.update_layout(margin = dict(t=50, l=25, r=25, b=25))
-
-
-# %% 7. TREEMAP com PIB - Área de influencia
+# %% 6. TREEMAP com PIB - Área de influencia
 
 
 fig_tm_PIB_ai = px.treemap(
