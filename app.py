@@ -292,15 +292,7 @@ fig_mapa_edu =  px.choropleth_map(
     labels = {'territorio_identidade':'Território de Identidade'},
     hover_name="municipio",
     hover_data = {"area_influencia": True,
-                  "codigo_ibge": False,
-                  "populacao": True,
-                  "urbanizacao": True,
-                  "IDH_2010": True,
-                  "indice_gini": True,
-                  "beneficiados_PBF": True,
-                  "PIB": True,
-                  "PIB_per_capita": True
-                  
+                  "codigo_ibge": False              
         },
     zoom=7,
     center={"lat": -12.97, "lon": -38.50},
