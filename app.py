@@ -221,24 +221,7 @@ fig_tm_PIB_ai = px.treemap(
 
 fig_tm_PIB_ai.update_layout(margin = dict(t=50, l=25, r=25, b=25))
 
-# %% 7. TREEMAP  PIB - Área de influencia
-
-
-fig_tm_PIB_ai = px.treemap(
-    df,
-    path = ['municipio', 'PIB'],
-    values = 'PIB_valor', 
-    color = 'area_influencia',
-    color_discrete_map = mapa_de_cores,
-    hover_data={
-        'PIB': False,
-        'area_influencia': True
-    })
-
-fig_tm_PIB_ai.update_layout(margin = dict(t=50, l=25, r=25, b=25))
-
-
-# %% 8. TREEMAP POPULAÇÂO
+# %% 7. TREEMAP POPULAÇÂO
 
 fig_pop = px.treemap(
     df,
@@ -252,7 +235,7 @@ fig_pop = px.treemap(
 
 fig_pop.update_layout(margin = dict(t=50, l=25, r=25, b=25))
 
-# %% 9. GRÁFICO SUNBURST ESTOQUE EMPREGOS FORMAIS
+# %% 8. GRÁFICO SUNBURST ESTOQUE EMPREGOS FORMAIS
 
 fig_emp =  px.sunburst(
     df, 
@@ -280,7 +263,7 @@ fig_emp.update_layout(
     margin=dict(t=10, l=10, r=10, b=10) # <--- Reduz margens para o gráfico expandir
 )
 
-# %% 10. MAPA DA TX ANALFABETISMO
+# %% 9. MAPA DA TX ANALFABETISMO
 
 fig_mapa_edu =  px.choropleth_map(
     df, 
@@ -384,7 +367,7 @@ with aba_socioeconomica:
     
     # LINHA 1: TERRITÓRIOS DE IDENTIDADE
     st.subheader("Territórios de Identidade e Cidades impactadas")
-    st.markdown("### 47 Cidades impactadas (BA tem o total de 417 cidades)")
+    st.markdown(" **47 Cidades impactadas (BA tem no total 417 cidades)**")
     st.plotly_chart(fig_mapa_reg, use_container_width=True)
       
 
