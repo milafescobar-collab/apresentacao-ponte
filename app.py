@@ -383,7 +383,8 @@ with aba_principal:
 with aba_socioeconomica:
     
     # LINHA 1: TERRITÓRIOS DE IDENTIDADE
-    st.subheader("Territórios de Identidade")
+    st.subheader("Territórios de Identidade e Cidades impactadas")
+    st.markdown("47 Cidades impactadas (BA tem o total de 417)")
     st.plotly_chart(fig_mapa_reg, use_container_width=True)
       
 
