@@ -113,7 +113,7 @@ fig =  px.choropleth_map(
                   "territorio_identidade": True
                   
         },
-    zoom=5.5,
+    zoom=7,
     center={"lat": -12.97, "lon": -38.50},
     map_style="open-street-map",   # Motor livre atualizado do Plotly
     opacity=0.7                    # Transparência para ver ruas e nomes sob as cores
