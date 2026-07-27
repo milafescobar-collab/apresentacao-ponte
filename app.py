@@ -214,7 +214,6 @@ fig_tm_PIB_ai = px.treemap(
     values = 'PIB_valor', 
     color = 'area_influencia',
     color_discrete_map = mapa_de_cores,
-    title = 'xx',
     hover_data={
         'PIB': False,
         'area_influencia': True
@@ -230,7 +229,7 @@ fig_pop = px.treemap(
     values = 'populacao_valor', 
     color = 'area_influencia',
     color_discrete_map = mapa_de_cores,
-    title = 'xx',
+    title = 'População das Áreas de Influência: 4.493.043 (30% da população total da BA) ',
     hover_data={
         'area_influencia': True
     })
