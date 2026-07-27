@@ -259,7 +259,17 @@ fig_emp =  px.sunburst(
     path = ['area_influencia', 'municipio'],
    values = 'estoque_emprego_formal_valor',
    color = 'area_influencia',
-   color_discrete_map = mapa_de_cores
+   color_discrete_map = mapa_de_cores,
+     hover_data={
+       'area_influencia': False,
+       'estoque_emprego_formal': True,
+       'saldo_emp_formal': True,
+       'estoque_servicos': True,
+       'estoque_comercio': True,
+       'estoque_industria_2025': True,
+       'estoque_agro': True,
+       'estoque_const.civil': True
+       }
 )
 
 
