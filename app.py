@@ -214,6 +214,7 @@ fig_tm_PIB_ai = px.treemap(
     values = 'PIB_valor', 
     color = 'area_influencia',
     color_discrete_map = mapa_de_cores,
+    title = 'xx',
     hover_data={
         'PIB': False,
         'area_influencia': True
@@ -229,6 +230,7 @@ fig_pop = px.treemap(
     values = 'populacao_valor', 
     color = 'area_influencia',
     color_discrete_map = mapa_de_cores,
+    title = 'xx',
     hover_data={
         'area_influencia': True
     })
@@ -254,7 +256,6 @@ fig_emp =  px.sunburst(
        'estoque_const.civil': True
        }
 )
-
 
 # Ajuste do tamanho e remoção de margens sobressalentes
 fig_emp.update_layout(
