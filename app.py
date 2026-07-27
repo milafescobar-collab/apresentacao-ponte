@@ -221,6 +221,37 @@ fig_tm_PIB_ai = px.treemap(
 
 fig_tm_PIB_ai.update_layout(margin = dict(t=50, l=25, r=25, b=25))
 
+# %% 7. TREEMAP  PIB - Área de influencia
+
+
+fig_tm_PIB_ai = px.treemap(
+    df,
+    path = ['municipio', 'PIB'],
+    values = 'PIB_valor', 
+    color = 'area_influencia',
+    color_discrete_map = mapa_de_cores,
+    hover_data={
+        'PIB': False,
+        'area_influencia': True
+    })
+
+fig_tm_PIB_ai.update_layout(margin = dict(t=50, l=25, r=25, b=25))
+
+
+# %% 8. TREEMAP POPULAÇÂO
+
+fig_pop = px.treemap(
+    df,
+    path = ['municipio', 'populacao'],
+    values = 'populacao_valor', 
+    color = 'area_influencia',
+    color_discrete_map = mapa_de_cores,
+    hover_data={
+        'area_influencia': True
+    })
+
+fig_pop.update_layout(margin = dict(t=50, l=25, r=25, b=25))
+
 
 # %% ==============================================================================
 # CRIAÇÃO DAS ABAS DO STREAMLIT
@@ -332,11 +363,18 @@ with aba_socioeconomica:
     st.plotly_chart(fig_mapa_reg, use_container_width=True)
     
     st.markdown("<br>", unsafe_allow_html=True) # Espaçamento suave entre linhas
-  
-      # LINHA 2: GRÁFICOS DE BARRAS LADO A LADO
 
-    st.subheader("Produto Interno Bruto por Área de Influência")
+    # LINHA 2: GRÁFICO POPULAÇÃO 
+    
+    st.subheader("População por Área de Influência")
+    st.plotly_chart(fig_pop, use_container_width=True)
+
+    
+    # LINHA 3: TREEMAP PIB
+
+    st.subheader("Produto Interno Bruto - PIB por Área de Influência")
     st.plotly_chart(fig_tm_PIB_ai, use_container_width=True)
+
 
 
 
