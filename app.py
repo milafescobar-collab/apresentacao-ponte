@@ -339,13 +339,13 @@ with aba_socioeconomica:
 
     # LINHA 2: GRÁFICO POPULAÇÃO 
     
-    st.subheader("População por Área de Influência")
+    st.subheader("População (2025)")
     st.plotly_chart(fig_pop, use_container_width=True)
 
     
     # LINHA 3: TREEMAP PIB
 
-    st.subheader("Produto Interno Bruto - PIB por Área de Influência")
+    st.subheader("Produto Interno Bruto - PIB (2023)")
     st.plotly_chart(fig_tm_PIB_ai, use_container_width=True)
  
    # LINHA 4: NOTAS DE RODAPÉ
