@@ -252,6 +252,23 @@ fig_pop = px.treemap(
 
 fig_pop.update_layout(margin = dict(t=50, l=25, r=25, b=25))
 
+# %% 9. GRÁFICO SUNBURST ESTOQUE EMPREGOS FORMAIS
+
+fig_emp =  px.sunburst(
+    df, 
+    path = ['area_influencia', 'municipio'],
+   values = 'estoque_emprego_formal_valor',
+   color = 'area_influencia',
+   color_discrete_map = mapa_de_cores
+)
+
+
+# Ajuste do tamanho e remoção de margens sobressalentes
+fig_emp.update_layout(
+    height=500,    # <--- Aumente a altura em pixels (ex: 600, 700, 800)
+    width=700,     # <--- Opcional: define uma largura fixa equivalente
+    margin=dict(t=10, l=10, r=10, b=10) # <--- Reduz margens para o gráfico expandir
+)
 
 # %% ==============================================================================
 # CRIAÇÃO DAS ABAS DO STREAMLIT
@@ -330,12 +347,18 @@ with aba_principal:
 # CONTEÚDO DA ABA 2: ANÁLISE SOCIOECONÔMICA (NOVA ABA)
 # ==============================================================================
 with aba_socioeconomica:
+
+  # LINHA 1: MAPAS 
+    col_mapa_1, col_mapa_2 = st.columns(2)
     
-    # LINHA 1: MAPA EM LARGURA TOTAL
-    st.subheader("Mapa de Distribuição dos Territórios de Identidade")
-    st.plotly_chart(fig_mapa_reg, use_container_width=True)
+    with col_mapa_1:
+        st.subheader("Territórios de Identidade")
+        st.plotly_chart(fig_mapa_reg, use_container_width=True)
+        
+    with col_mapa_2:
+        st.subheader("Empregos formais")
+        st.plotly_chart(fig_emp, use_container_width=True)
     
-    st.markdown("<br>", unsafe_allow_html=True) # Espaçamento suave entre linhas
 
     # LINHA 2: GRÁFICO POPULAÇÃO 
     
