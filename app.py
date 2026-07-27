@@ -168,7 +168,7 @@ fig_quilombos.update_layout(margin={"r": 0, "t": 20, "l": 0, "b": 0},
                             height=300,
                             bargap=0.0)
 
-# %% 5. CONSTRUÇÃO DO MAPA INTERATIVO COM AS REGIÕES SOCIOECONOMICAS
+# %% 5.MAPA INTERATIVO COM AS REGIÕES SOCIOECONOMICAS
 
 fig_mapa_reg =  px.choropleth_map(
     df, 
@@ -280,6 +280,38 @@ fig_emp.update_layout(
     margin=dict(t=10, l=10, r=10, b=10) # <--- Reduz margens para o gráfico expandir
 )
 
+# %% 10. MAPA DA TX ANALFABETISMO
+
+fig_mapa_edu =  px.choropleth_map(
+    df, 
+   geojson=geojson_bahia,
+    locations="codigo_ibge",       # Coluna que serve de chave no seu DataFrame
+    featureidkey="properties.id",  # Chave correspondente dentro da estrutura do GeoJSON
+    color="analfabetismo_perc",     
+    color_continuous_scale= 'Plasma',
+    labels = {'territorio_identidade':'Território de Identidade'},
+    hover_name="municipio",
+    hover_data = {"area_influencia": True,
+                  "codigo_ibge": False,
+                  "populacao": True,
+                  "urbanizacao": True,
+                  "IDH_2010": True,
+                  "indice_gini": True,
+                  "beneficiados_PBF": True,
+                  "PIB": True,
+                  "PIB_per_capita": True
+                  
+        },
+    zoom=7,
+    center={"lat": -12.97, "lon": -38.50},
+    map_style="open-street-map",   # Motor livre atualizado do Plotly
+    opacity=0.7                    # Transparência para ver ruas e nomes sob as cores
+)
+
+
+
+fig_mapa_edu.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
+
 # %% ==============================================================================
 # CRIAÇÃO DAS ABAS DO STREAMLIT
 # ==============================================================================
@@ -357,18 +389,11 @@ with aba_principal:
 # CONTEÚDO DA ABA 2: ANÁLISE SOCIOECONÔMICA (NOVA ABA)
 # ==============================================================================
 with aba_socioeconomica:
-
-  # LINHA 1: MAPAS 
-    col_mapa_1, col_mapa_2 = st.columns(2)
     
-    with col_mapa_1:
-        st.subheader("Territórios de Identidade")
-        st.plotly_chart(fig_mapa_reg, use_container_width=True)
-        
-    with col_mapa_2:
-        st.subheader("Estoque de Empregos Formais - RAIS 2025")
-        st.plotly_chart(fig_emp, use_container_width=True)
-    
+    # LINHA 1: TERRITÓRIOS DE IDENTIDADE
+    st.subheader("Territórios de Identidade")
+    st.plotly_chart(fig_mapa_reg, use_container_width=True)
+      
 
     # LINHA 2: GRÁFICO POPULAÇÃO 
     
@@ -380,8 +405,22 @@ with aba_socioeconomica:
 
     st.subheader("Produto Interno Bruto - PIB (2023)")
     st.plotly_chart(fig_tm_PIB_ai, use_container_width=True)
- 
-   # LINHA 4: NOTAS DE RODAPÉ
+    
+    
+    # LINHA 4: MAPAS 
+    col_mapa_1, col_mapa_2 = st.columns(2)
+    
+    with col_mapa_1:
+        st.subheader("Taxa de Analfabetismo (%)")
+        st.plotly_chart(fig_mapa_edu, use_container_width=True)
+        
+    with col_mapa_2:
+        st.subheader("Estoque de Empregos formais - RAIS 2025")
+        st.plotly_chart(fig_emp, use_container_width=True)
+        
+        
+    
+    # LINHA 5: NOTAS DE RODAPÉ
     st.divider()
     
     # Organização em 2 colunas para notas explicativas e resumo
@@ -395,8 +434,7 @@ with aba_socioeconomica:
             Áreas de Influência classificadas de acordo com Relatório de Impacto Ambiental - RIMA.  
             **Nomenclatura:** 
             * **ADA:** Área diretamente afetada. Área necessária para implantação das obras e passível de intervenção física direta.
-            * **AID:** Área de influência direta. Áreas contíguas à ADA, compreende uma faixa de 3.000 m, centrada na diretriz da ponte/rodovia (1.500 de cada lado). Apesar de não conterem as obras de infraestrutura, apresentam risco de serem afetadas em função de suas características físicas, bióticas, sociais e econômicas.
-            * **AII:** Área de influência indireta. Área geográfica onde poderão se refletir as eventuais consequências, impactos ou efeitos induzidos pelo projeto.
+            * **AID:** Área de influência direta. Áreas contíguas à ADA, compreende uma faixa de 3.000 m, centrada na diretriz da ponte/rodovia (1.500 de cada lado).
             """
         )
     with info_col5:
@@ -405,7 +443,7 @@ with aba_socioeconomica:
             """
             * **Fonte de Dados - Comunidades quilombolas e aldeias indígenas:** Censo Demográfico IBGE 2022.
             * **Fonte de Dados - Pescadores:** BRASIL. Ministério da Pesca e Aquicultura. Painel Unificado do RGP. Brasília: MPA, [202-]. Disponível em: <https://www.gov.br/mpa/pt-br/assuntos/cadastro-registro-e-monitoramento/painel-unificado-do-registro-geral-da-atividade-pesqueira>. Acesso em: 17 jul. 2026.
-            * **Indicadores socioeconômicos:** https://seimunicipios.sei.ba.gov.br/.
+            * **Indicadores socioeconômicos:** https://seimunicipios.sei.ba.gov.br/
             """
         )
     
