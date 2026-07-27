@@ -283,9 +283,27 @@ fig_mapa_edu =  px.choropleth_map(
     opacity=0.7                    # Transparência para ver ruas e nomes sob as cores
 )
 
+# %% 10. MAPA DA TX PESSOAS QUE RECEBEM BPC
 
+fig_mapa_bpc =  px.choropleth_map(
+    df, 
+   geojson=geojson_bahia,
+    locations="codigo_ibge",       # Coluna que serve de chave no seu DataFrame
+    featureidkey="properties.id",  # Chave correspondente dentro da estrutura do GeoJSON
+    color="beneficiados_PBF_perc",     
+    color_continuous_scale= 'Plasma',
+    labels = {'territorio_identidade':'Território de Identidade'},
+    hover_name="municipio",
+    hover_data = {"area_influencia": True,
+                  "codigo_ibge": False              
+        },
+    zoom=7,
+    center={"lat": -12.97, "lon": -38.50},
+    map_style="open-street-map",   # Motor livre atualizado do Plotly
+    opacity=0.7                    # Transparência para ver ruas e nomes sob as cores
+)
 
-fig_mapa_edu.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
+fig_mapa_bpc.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
 
 # %% ==============================================================================
 # CRIAÇÃO DAS ABAS DO STREAMLIT
@@ -394,9 +412,12 @@ with aba_socioeconomica:
         st.subheader("Estoque de Empregos formais - RAIS 2025")
         st.plotly_chart(fig_emp, use_container_width=True)
         
-        
+     # LINHA 5: MAPA PESSOAS QUE RECEBEM BPC
+    st.subheader("Taxa de Analfabetismo (%)")
+    st.plotly_chart(fig_mapa_bpc, use_container_width=True)
     
-    # LINHA 5: NOTAS DE RODAPÉ
+
+    # LINHA 6: NOTAS DE RODAPÉ
     st.divider()
     
     # Organização em 2 colunas para notas explicativas e resumo
