@@ -356,7 +356,7 @@ with aba_socioeconomica:
         st.plotly_chart(fig_mapa_reg, use_container_width=True)
         
     with col_mapa_2:
-        st.subheader("Empregos formais")
+        st.subheader("Estoque de Empregos formais - RAIS 2025")
         st.plotly_chart(fig_emp, use_container_width=True)
     
 
