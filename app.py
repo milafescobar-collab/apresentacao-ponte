@@ -412,12 +412,9 @@ with aba_socioeconomica:
         st.subheader("Estoque de Empregos formais - RAIS 2025")
         st.plotly_chart(fig_emp, use_container_width=True)
         
-     # LINHA 5: MAPA PESSOAS QUE RECEBEM BPC
-    st.subheader("Taxa de Analfabetismo (%)")
-    st.plotly_chart(fig_mapa_bpc, use_container_width=True)
     
 
-    # LINHA 6: NOTAS DE RODAPÉ
+    # LINHA 5: NOTAS DE RODAPÉ
     st.divider()
     
     # Organização em 2 colunas para notas explicativas e resumo
