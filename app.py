@@ -22,7 +22,6 @@ st.title("Áreas de Influência - Ponte Salvador Ilha de Itaparica")
 st.write("---")
 
 
-
 # %% Importando arquivo
 
 tabela = pd.read_csv("dados/dados_tabelados_pescadores_2.csv",
