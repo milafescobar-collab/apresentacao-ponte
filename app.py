@@ -428,6 +428,8 @@ with aba_socioeconomica:
             **Nomenclatura:** 
             * **ADA:** Área diretamente afetada. Área necessária para implantação das obras e passível de intervenção física direta.
             * **AID:** Área de influência direta. Áreas contíguas à ADA, compreende uma faixa de 3.000 m, centrada na diretriz da ponte/rodovia (1.500 de cada lado).
+            * **AII:** Área de influência indireta. Área geográfica onde poderão se refletir as eventuais consequências, impactos ou efeitos induzidos pelo projeto.
+        """
             """
         )
     with info_col5:
