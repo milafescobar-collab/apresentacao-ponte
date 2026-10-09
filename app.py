@@ -24,7 +24,7 @@ st.write("---")
 
 # %% Importando arquivo
 
-tabela = pd.read_csv("dados/dados_tabelados_pescadores_2.csv",
+tabela = pd.read_csv("dados/dados_tabelados_pescadores_3.csv",
                      encoding="latin-1",
                      sep=";")
 
