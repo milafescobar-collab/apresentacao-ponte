@@ -18,6 +18,69 @@ pio.renderers.default = 'browser'
 # %% configurando a pagina web
 st.set_page_config(page_title="Meu Dashboard", layout="wide")
 
+## Aparência do filtro
+st.markdown("""
+<style>
+    /* 1. Estilização da barra lateral */
+    section[data-testid="stSidebar"] {
+        background-color: #f8fafc;
+        border-right: 1px solid #e2e8f0;
+    }
+
+    /* 2. Rótulos/títulos dos campos de filtro */
+    section[data-testid="stSidebar"] label p {
+        font-weight: 600 !important;
+        color: #1e293b !important;
+        font-size: 0.90rem !important;
+        margin-bottom: 2px !important;
+    }
+
+    /* 3. Estilo das caixas de entrada/seleção */
+    div[data-baseweb="select"] > div {
+        border-radius: 8px !important;
+        border: 1px solid #cbd5e1 !important;
+        background-color: #ffffff !important;
+        transition: all 0.2s ease-in-out;
+    }
+
+    /* 4. Realce de foco na caixa de seleção */
+    div[data-baseweb="select"]:focus-within > div {
+        border-color: #2563eb !important;
+        box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2) !important;
+    }
+
+    /* 5. Estilo dos chips/tags selecionadas dentro do multiselect */
+    span[data-baseweb="tag"] {
+        background-color: #1e40af !important; /* Azul sóbrio e profissional */
+        color: #ffffff !important;
+        border-radius: 6px !important;
+        font-weight: 500 !important;
+        font-size: 0.82rem !important;
+        padding-left: 8px !important;
+    }
+
+    /* 6. Ícone de fechar (x) da tag */
+    span[data-baseweb="tag"] svg {
+        fill: #ffffff !important;
+    }
+
+    /* 7. Estilo dos botões auxiliares na sidebar */
+    section[data-testid="stSidebar"] div.stButton > button {
+        border-radius: 6px !important;
+        font-size: 0.82rem !important;
+        font-weight: 600 !important;
+        padding: 4px 10px !important;
+        border: 1px solid #cbd5e1 !important;
+        background-color: #ffffff !important;
+        color: #334155 !important;
+    }
+    section[data-testid="stSidebar"] div.stButton > button:hover {
+        border-color: #2563eb !important;
+        color: #2563eb !important;
+    }
+</style>
+""", unsafe_allow_html=True)
+
 st.title("Relatório de Impacto nas Áreas de Influência - Sistema Rodoviário Ponte Salvador Ilha de Itaparica")
 st.write("---")
 
