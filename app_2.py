@@ -80,7 +80,7 @@ df['VAB_com_serv_2021'] = df['VAB_com_serv_2021'].str.replace(',', '.').astype(f
 df['VAB_agro_2021'] = df['VAB_agro_2021'].str.replace(',', '.').astype(float)
 df['VAB_ind_2021'] = df['VAB_ind_2021'].str.replace(',', '.').astype(float)
 
-# %% [NOVO] BARRA LATERAL COM FILTROS
+# %% BARRA LATERAL COM FILTROS
 st.sidebar.header("🔍 Filtros de Consulta")
 
 # Filtro 1: Área de Influência
@@ -110,7 +110,7 @@ filtro_municipios = st.sidebar.multiselect(
     default=opcoes_municipios
 )
 
-# %% [NOVO] APLICAÇÃO DOS FILTROS
+# %% APLICAÇÃO DOS FILTROS
 df_filtrado = df[
     (df['area_influencia'].isin(filtro_area)) &
     (df['territorio_identidade'].isin(filtro_territorio)) &
@@ -123,7 +123,7 @@ if df_filtrado.empty:
     st.stop()
 
 
-# %% 1. MAPEAMENTO DE CORES CATEGÓRICAS (Mantido fixo no df geral para as cores não variarem)
+# %% 1. MAPEAMENTO DE CORES CATEGÓRICAS 
 categorias_unicas = sorted(df['area_influencia'].unique())
 cores = ['#e15759', '#59a14f', '#4e79a7']
 mapa_de_cores = {cat: cores[i % len(cores)] for i, cat in enumerate(categorias_unicas)}
@@ -133,7 +133,7 @@ cores_territorio = ['#5B2260', '#384B43', '#B85723', '#FDBD59']
 mapa_cores_territorio = {cat: cores_territorio[i % len(cores_territorio)] for i, cat in enumerate(categorias_unicas_terrtorio)}
 
 
-# %% 2. CONSTRUÇÃO DO MAPA INTERATIVO [ALTERADO: df -> df_filtrado]
+# %% 2. CONSTRUÇÃO DO MAPA INTERATIVO 
 fig = px.choropleth_map(
     df_filtrado, 
     geojson=geojson_bahia,
@@ -159,7 +159,7 @@ fig = px.choropleth_map(
 fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
 
 
-# %% 3. GRÁFICO DA QUANTIDADE DE PESCADORES [ALTERADO: agrupamento e título dinâmicos]
+# %% 3. GRÁFICO DA QUANTIDADE DE PESCADORES
 df_pescadores = df_filtrado.groupby('area_influencia', as_index=False)['Pescadores'].sum()
 total_pescadores_filtrado = df_filtrado['Pescadores'].sum()
 
@@ -181,7 +181,7 @@ fig_pescadores.update_layout(margin={"r": 0, "t": 20, "l": 0, "b": 0},
                              bargap=0.0)
 
 
-# %% 4. GRÁFICO DA QUANTIDADE DE COM. QUILOMBOLAS [ALTERADO: agrupamento e título dinâmicos]
+# %% 4. GRÁFICO DA QUANTIDADE DE COM. QUILOMBOLAS 
 df_quilombos = df_filtrado.groupby('area_influencia', as_index=False)['comunidades_quilombolas'].sum()
 total_quilombos_filtrado = df_filtrado['comunidades_quilombolas'].sum()
 
@@ -203,7 +203,7 @@ fig_quilombos.update_layout(margin={"r": 0, "t": 20, "l": 0, "b": 0},
                             bargap=0.0)
 
 
-# %% 5. MAPA INTERATIVO COM AS REGIÕES SOCIOECONOMICAS [ALTERADO: df -> df_filtrado]
+# %% 5. MAPA INTERATIVO COM AS REGIÕES SOCIOECONOMICAS 
 fig_mapa_reg = px.choropleth_map(
     df_filtrado, 
     geojson=geojson_bahia,
@@ -236,7 +236,7 @@ fig_mapa_reg = px.choropleth_map(
 fig_mapa_reg.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
 
 
-# %% 6. TREEMAP com PIB [ALTERADO: df -> df_filtrado]
+# %% 6. TREEMAP com PIB 
 fig_tm_PIB_ai = px.treemap(
     df_filtrado,
     path=['municipio', 'PIB'],
