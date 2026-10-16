@@ -5,6 +5,11 @@ Created on Fri Jul 17 15:11:22 2026
 @author: AEPIT/MTE
 """
 
+
+# %% ==============================================================================
+# BIBLIOTECAS
+# =================================================================================
+
 import streamlit as st
 import pandas as pd
 import plotly.express as px
@@ -15,13 +20,19 @@ import plotly.graph_objects as go
 # FORÇAR ABERTURA NO NAVEGADOR (Configuração para o Spyder)
 pio.renderers.default = 'browser' 
 
-# %% configurando a pagina web
+
+# %% ==============================================================================
+# CONFIGURANDO PÁGINA NA WEB
+# =================================================================================
+
 st.set_page_config(page_title="Meu Dashboard", layout="wide")
 st.title("Relatório de Impacto nas Áreas de Influência - Sistema Rodoviário Ponte Salvador Ilha de Itaparica")
 st.write("---")
 
 
-# %% Importando arquivo
+# %% ==============================================================================
+# IMPORTANDO ARQUIVO
+# =================================================================================
 
 tabela = pd.read_csv("dados/dados_tabelados_pescadores.csv",
                      encoding="latin-1",
@@ -44,7 +55,9 @@ with open("dados/geojs-29-mun.json", "r", encoding="utf-8") as f:
     geojson_bahia = json.load(f)
 
 
-# %% Ajustes nos dataframes
+# %% ==============================================================================
+# AJUSTES DF
+# =================================================================================
 
 ## organizando df tabela
 tabela = tabela.dropna(subset = ["area_influencia"])
@@ -80,8 +93,11 @@ df['VAB_com_serv_2021'] = df['VAB_com_serv_2021'].str.replace(',', '.').astype(f
 df['VAB_agro_2021'] = df['VAB_agro_2021'].str.replace(',', '.').astype(float)
 df['VAB_ind_2021'] = df['VAB_ind_2021'].str.replace(',', '.').astype(float)
 
-# %% BARRA LATERAL COM FILTROS
-st.sidebar.header("🔍 Filtros de Consulta")
+# %% ==============================================================================
+# BARRA LATERAL COM FILTROS
+# =================================================================================
+
+st.sidebar.header("🔍 Filtros")
 
 # Filtro 1: Área de Influência
 opcoes_area = sorted(df['area_influencia'].dropna().unique())
@@ -122,6 +138,9 @@ if df_filtrado.empty:
     st.warning("⚠️ Nenhum município corresponde aos filtros selecionados. Por favor, revise a seleção na barra lateral.")
     st.stop()
 
+# %% ==============================================================================
+# GRÁFICOS
+# =================================================================================
 
 # %% 1. MAPEAMENTO DE CORES CATEGÓRICAS 
 categorias_unicas = sorted(df['area_influencia'].unique())
@@ -248,7 +267,7 @@ fig_tm_PIB_ai = px.treemap(
 fig_tm_PIB_ai.update_layout(margin=dict(t=50, l=25, r=25, b=25))
 
 
-# %% 7. TREEMAP POPULAÇÃO [ALTERADO: df -> df_filtrado e título dinâmico]
+# %% 7. TREEMAP POPULAÇÃO 
 total_pop_filtrada = df_filtrado['populacao_valor'].sum() if 'populacao_valor' in df_filtrado.columns else 0
 
 fig_pop = px.treemap(
@@ -263,7 +282,7 @@ fig_pop = px.treemap(
 fig_pop.update_layout(margin=dict(t=50, l=25, r=25, b=25))
 
 
-# %% 8. GRÁFICO SUNBURST ESTOQUE EMPREGOS FORMAIS [ALTERADO: df -> df_filtrado]
+# %% 8. GRÁFICO SUNBURST ESTOQUE EMPREGOS FORMAIS 
 fig_emp = px.sunburst(
     df_filtrado, 
     path=['area_influencia', 'municipio'],
@@ -288,7 +307,7 @@ fig_emp.update_layout(
 )
 
 
-# %% 9. MAPA DA TX ANALFABETISMO [ALTERADO: df -> df_filtrado]
+# %% 9. MAPA DA TX ANALFABETISMO 
 fig_mapa_edu = px.choropleth_map(
     df_filtrado, 
     geojson=geojson_bahia,
@@ -306,7 +325,7 @@ fig_mapa_edu = px.choropleth_map(
 )
 
 
-# %% 10. MAPA DA TX PESSOAS QUE RECEBEM BPC [ALTERADO: df -> df_filtrado]
+# %% 10. MAPA DA TX PESSOAS QUE RECEBEM BPC 
 fig_mapa_bpc = px.choropleth_map(
     df_filtrado, 
     geojson=geojson_bahia,
@@ -327,7 +346,7 @@ fig_mapa_bpc.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
 
 # %% ==============================================================================
 # CRIAÇÃO DAS ABAS DO STREAMLIT
-# ==============================================================================
+# =================================================================================
 
 aba_principal, aba_socioeconomica = st.tabs(["🗺️ Visão Geral e Comunidades", "📈 Indicadores Socioeconômicos"])
 
@@ -335,7 +354,7 @@ aba_principal, aba_socioeconomica = st.tabs(["🗺️ Visão Geral e Comunidades
 # CONTEÚDO DA ABA 1: VISÃO GERAL
 # ==============================================================================
 with aba_principal:
-    st.subheader("Mapa de Distribuição das Áreas de Influência")
+    st.subheader("Distribuição das Áreas de Influência")
     st.plotly_chart(fig, use_container_width=True)
     
     st.markdown("<br>", unsafe_allow_html=True)
