@@ -228,7 +228,7 @@ total_ciganos_filtrado = df_filtrado['familias_ciganas_MIR'].sum()
 
 fig_ciganos = px.bar( 
     df_ciganos, 
-    x='Pescadores',
+    x='familias_ciganas_MIR',
     y='area_influencia',
     title=f'Total de famílias ciganas: {total_ciganos_filtrado:,.0f}'.replace(',', '.'),
     orientation='h',
