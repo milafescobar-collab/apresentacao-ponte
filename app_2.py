@@ -222,7 +222,30 @@ fig_quilombos.update_layout(margin={"r": 0, "t": 20, "l": 0, "b": 0},
                             bargap=0.0)
 
 
-# %% 5. MAPA INTERATIVO COM AS REGIÕES SOCIOECONOMICAS 
+# %% 5. GRÁFICO DA QUANTIDADE DE FAMÍLIAS CIGANAS
+df_ciganos = df_filtrado.groupby('area_influencia', as_index=False)[''].sum()
+total_pescadores_filtrado = df_filtrado['Pescadores'].sum()
+
+fig_ciganos = px.bar( 
+    df_pescadores, 
+    x='Pescadores',
+    y='area_influencia',
+    title=f'Total de pescadores: {total_pescadores_filtrado:,.0f}'.replace(',', '.'),
+    orientation='h',
+    color='area_influencia',
+    color_discrete_map=mapa_de_cores,
+    labels={'area_influencia': 'Área de influência'},
+    barmode='group',
+    text_auto=True,
+    opacity=0.7  
+)
+fig_pescadores.update_layout(margin={"r": 0, "t": 20, "l": 0, "b": 0}, 
+                             height=300,
+                             bargap=0.0)
+
+
+
+# %% 6. MAPA INTERATIVO COM AS REGIÕES SOCIOECONOMICAS 
 fig_mapa_reg = px.choropleth_map(
     df_filtrado, 
     geojson=geojson_bahia,
@@ -255,7 +278,7 @@ fig_mapa_reg = px.choropleth_map(
 fig_mapa_reg.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
 
 
-# %% 6. TREEMAP com PIB 
+# %% 7. TREEMAP com PIB 
 fig_tm_PIB_ai = px.treemap(
     df_filtrado,
     path=['municipio', 'PIB'],
@@ -267,7 +290,7 @@ fig_tm_PIB_ai = px.treemap(
 fig_tm_PIB_ai.update_layout(margin=dict(t=50, l=25, r=25, b=25))
 
 
-# %% 7. TREEMAP POPULAÇÃO 
+# %% 8. TREEMAP POPULAÇÃO 
 total_pop_filtrada = df_filtrado['populacao_valor'].sum() if 'populacao_valor' in df_filtrado.columns else 0
 
 fig_pop = px.treemap(
@@ -282,7 +305,7 @@ fig_pop = px.treemap(
 fig_pop.update_layout(margin=dict(t=50, l=25, r=25, b=25))
 
 
-# %% 8. GRÁFICO SUNBURST ESTOQUE EMPREGOS FORMAIS 
+# %% 9. GRÁFICO SUNBURST ESTOQUE EMPREGOS FORMAIS 
 fig_emp = px.sunburst(
     df_filtrado, 
     path=['area_influencia', 'municipio'],
@@ -307,7 +330,7 @@ fig_emp.update_layout(
 )
 
 
-# %% 9. MAPA DA TX ANALFABETISMO 
+# %% 10. MAPA DA TX ANALFABETISMO 
 fig_mapa_edu = px.choropleth_map(
     df_filtrado, 
     geojson=geojson_bahia,
@@ -325,7 +348,7 @@ fig_mapa_edu = px.choropleth_map(
 )
 
 
-# %% 10. MAPA DA TX PESSOAS QUE RECEBEM BPC 
+# %% 11. MAPA DA TX PESSOAS QUE RECEBEM BPC 
 fig_mapa_bpc = px.choropleth_map(
     df_filtrado, 
     geojson=geojson_bahia,
