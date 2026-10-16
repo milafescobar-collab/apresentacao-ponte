@@ -388,7 +388,7 @@ with aba_principal:
     st.subheader("🏘️ Comunidades Quilombolas")
     st.plotly_chart(fig_quilombos, use_container_width=True)
 
-    st.subheader("🏘️ Famílias Ciganas")
+    st.subheader("☸️ Famílias Ciganas")
     st.plotly_chart(fig_ciganos, use_container_width=True)
       
     st.divider()
