@@ -392,7 +392,7 @@ with aba_principal:
         st.subheader("🏘️ Comunidades Quilombolas")
         st.plotly_chart(fig_quilombos, use_container_width=True)
 
-  with col_barras_3:
+    with col_barras_3:
         st.subheader("🏘️ Famílias Ciganas")
         st.plotly_chart(fig_ciganos, use_container_width=True)
       
