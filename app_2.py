@@ -382,19 +382,14 @@ with aba_principal:
     
     st.markdown("<br>", unsafe_allow_html=True)
     
-    col_barras_1, col_barras_2, col_barras_3 = st.columns(3)
-      
-    with col_barras_1:
-        st.subheader("🚣 Pescadores")
-        st.plotly_chart(fig_pescadores, use_container_width=True)
+    st.subheader("🚣 Pescadores")
+    st.plotly_chart(fig_pescadores, use_container_width=True)
     
-    with col_barras_2:
-        st.subheader("🏘️ Comunidades Quilombolas")
-        st.plotly_chart(fig_quilombos, use_container_width=True)
+    st.subheader("🏘️ Comunidades Quilombolas")
+    st.plotly_chart(fig_quilombos, use_container_width=True)
 
-    with col_barras_3:
-        st.subheader("🏘️ Famílias Ciganas")
-        st.plotly_chart(fig_ciganos, use_container_width=True)
+    st.subheader("🏘️ Famílias Ciganas")
+    st.plotly_chart(fig_ciganos, use_container_width=True)
       
     st.divider()
     
