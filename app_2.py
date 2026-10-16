@@ -223,14 +223,14 @@ fig_quilombos.update_layout(margin={"r": 0, "t": 20, "l": 0, "b": 0},
 
 
 # %% 5. GRÁFICO DA QUANTIDADE DE FAMÍLIAS CIGANAS
-df_ciganos = df_filtrado.groupby('area_influencia', as_index=False)[''].sum()
-total_pescadores_filtrado = df_filtrado['Pescadores'].sum()
+df_ciganos = df_filtrado.groupby('area_influencia', as_index=False)['familias_ciganas_MIR'].sum()
+total_ciganos_filtrado = df_filtrado['familias_ciganas_MIR'].sum()
 
 fig_ciganos = px.bar( 
-    df_pescadores, 
+    df_ciganos, 
     x='Pescadores',
     y='area_influencia',
-    title=f'Total de pescadores: {total_pescadores_filtrado:,.0f}'.replace(',', '.'),
+    title=f'Total de famílias ciganas: {total_ciganos_filtrado:,.0f}'.replace(',', '.'),
     orientation='h',
     color='area_influencia',
     color_discrete_map=mapa_de_cores,
@@ -239,7 +239,7 @@ fig_ciganos = px.bar(
     text_auto=True,
     opacity=0.7  
 )
-fig_pescadores.update_layout(margin={"r": 0, "t": 20, "l": 0, "b": 0}, 
+fig_ciganos.update_layout(margin={"r": 0, "t": 20, "l": 0, "b": 0}, 
                              height=300,
                              bargap=0.0)
 
