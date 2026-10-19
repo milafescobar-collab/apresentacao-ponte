@@ -432,7 +432,9 @@ fig_mapa_bpc.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
 # CRIAÇÃO DAS ABAS DO STREAMLIT
 # =================================================================================
 
-aba_principal, aba_socioeconomica = st.tabs(["🗺️ Visão Geral e Comunidades", "📈 Indicadores Socioeconômicos"])
+aba_principal, aba_socioeconomica, aba_ref = st.tabs(["🗺️ Visão Geral e Comunidades", 
+                                                      "📈 Indicadores Socioeconômicos",
+                                                      "📜 Notas estatísticas e Referências"])
 
 # ==============================================================================
 # CONTEÚDO DA ABA 1: VISÃO GERAL
@@ -559,5 +561,12 @@ with aba_socioeconomica:
             """
         )
 
+# ==============================================================================
+# CONTEÚDO DA ABA 3: ESTATÍSTICAS E REFERÊNCIAS
+# ==============================================================================
+
+with aba_principal:
+    st.subheader("Nostas Estatísticas")
+    st.plotly_chart(fig, use_container_width=True)
 
 
