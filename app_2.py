@@ -154,7 +154,7 @@ mapa_cores_territorio = {cat: cores_territorio[i % len(cores_territorio)] for i,
 
 # ABA VISÃO GERAL E COMUNIDADES ====================================================
 
-# %% 2. CONSTRUÇÃO DO MAPA INTERATIVO 
+# %% 2. CONSTRUÇÃO DO MAPA INTERATIVO ==============================================
 fig = px.choropleth_map(
     df_filtrado, 
     geojson=geojson_bahia,
@@ -180,7 +180,8 @@ fig = px.choropleth_map(
 fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
 
 
-# %% 3. GRÁFICO DA QUANTIDADE DE PESCADORES
+# %% 3. GRÁFICO DA QUANTIDADE DE PESCADORES =======================================
+
 df_pescadores = df_filtrado.groupby('area_influencia', as_index=False)['Pescadores'].sum()
 total_pescadores_filtrado = df_filtrado['Pescadores'].sum()
 
@@ -198,7 +199,7 @@ fig_pescadores = px.bar(
     opacity=0.7  
 )
 fig_pescadores.update_layout(margin={"r": 0, "t": 20, "l": 0, "b": 0}, 
-                             height=300,
+                             height=500,
                              bargap=0.0)
 
 # %% 3.1. GRÁFICO SUNBURST PESCADORES POR CIDADE 
