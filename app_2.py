@@ -26,7 +26,8 @@ pio.renderers.default = 'browser'
 # =================================================================================
 
 st.set_page_config(page_title="Meu Dashboard", layout="wide")
-st.title("Relatório de Impacto nas Áreas de Influência - Sistema Rodoviário Ponte Salvador Ilha de Itaparica")
+st.title("Relatório de Impacto nas Áreas de Influência")
+st.subheader("Sistema Rodoviário Ponte Salvador - Ilha de Itaparica")
 st.write("---")
 
 
