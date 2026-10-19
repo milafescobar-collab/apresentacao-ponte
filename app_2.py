@@ -152,6 +152,7 @@ categorias_unicas_terrtorio = sorted(df['territorio_identidade'].unique())
 cores_territorio = ['#5B2260', '#384B43', '#B85723', '#FDBD59']
 mapa_cores_territorio = {cat: cores_territorio[i % len(cores_territorio)] for i, cat in enumerate(categorias_unicas_terrtorio)}
 
+# ABA VISÃO GERAL E COMUNIDADES ====================================================
 
 # %% 2. CONSTRUÇÃO DO MAPA INTERATIVO 
 fig = px.choropleth_map(
@@ -200,6 +201,28 @@ fig_pescadores.update_layout(margin={"r": 0, "t": 20, "l": 0, "b": 0},
                              height=300,
                              bargap=0.0)
 
+# %% 3.1. GRÁFICO SUNBURST PESCADORES POR CIDADE 
+fig_pesc_mun = px.sunburst(
+    df_filtrado, 
+    path=['area_influencia', 'municipio'],
+    values='Pescadores',
+    color='area_influencia',
+    color_discrete_map=mapa_de_cores,
+    hover_data={
+        'area_influencia': False,
+        'Pescadores': True,
+        'ARTESANAL': True,
+        'INDUSTRIAL': True,
+    }
+)
+fig_pesc_mun.update_layout(
+    height=500,
+    width=500,
+    margin=dict(t=10, l=10, r=10, b=10)
+)
+
+
+
 
 # %% 4. GRÁFICO DA QUANTIDADE DE COM. QUILOMBOLAS 
 df_quilombos = df_filtrado.groupby('area_influencia', as_index=False)['comunidades_quilombolas'].sum()
@@ -245,6 +268,8 @@ fig_ciganos.update_layout(margin={"r": 0, "t": 20, "l": 0, "b": 0},
                              bargap=0.0)
 
 
+
+# ABA INDICADORES SOCIOECONÔMICOS ==================================================
 
 # %% 6. MAPA INTERATIVO COM AS REGIÕES SOCIOECONOMICAS 
 fig_mapa_reg = px.choropleth_map(
@@ -384,8 +409,15 @@ with aba_principal:
     st.markdown("<br>", unsafe_allow_html=True)
     
     st.subheader("🚣 Pescadores")
-    st.plotly_chart(fig_pescadores, use_container_width=True)
+    col_pesc_1, col_pesc_2 = st.columns(2)
     
+    with col_pesc_1:
+        st.plotly_chart(fig_pescadores, use_container_width=True)
+        
+    with col_pesc_2:
+        st.plotly_chart(fig_pesc_mun, use_container_width=True)
+        
+  
     st.subheader("🏘️ Comunidades Quilombolas")
     st.plotly_chart(fig_quilombos, use_container_width=True)
 
