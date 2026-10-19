@@ -536,37 +536,35 @@ with aba_socioeconomica:
 with aba_ref:
   st.subheader("📊 Notas Estatísticas (Base Geral)")
   st.markdown("<br>", unsafe_allow_html=True)
-    
-    info_col1, info_col2, info_col3 = st.columns(3)
-    
-    with info_col1:
-        st.markdown("#### 🚣 Pescadores")
-        st.markdown(
+  
+  info_col1, info_col2, info_col3 = st.columns(3)
+  
+  with info_col1:
+    st.markdown("#### 🚣 Pescadores")
+    st.markdown(
             f"""
             * **Total no Filtro:** {total_pescadores_filtrado:,.0f}
             * Total geral da base (74.668) representa **42,2%** da Bahia.
             """
         )
             
-    with info_col2:
-        st.markdown("##### ⛺ Comunidades Indígenas")
-        st.markdown(
+  with info_col2:
+    st.markdown("##### ⛺ Comunidades Indígenas")
+    st.markdown(
             """
             * Total de aldeias indígenas = 4 (2 em Camaçari e 2 em Camamú).  
             * Representa **1,1%** do total do estado da Bahia.
             """
         )
         
-    with info_col3:
-        st.markdown("##### 🏘️ Comunidades Quilombolas")
-        st.markdown(
+  with info_col3:
+    st.markdown("##### 🏘️ Comunidades Quilombolas")
+    st.markdown(
             f"""
             * **Total no Filtro:** {total_quilombos_filtrado:,.0f}
             * Total geral da base (283) representa **15,6%** da Bahia.
             """
         )
 
-
-    st.plotly_chart(fig, use_container_width=True)
 
 
