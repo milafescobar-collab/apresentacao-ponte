@@ -217,15 +217,15 @@ fig_pesc_mun = px.sunburst(
     }
 )
 fig_pesc_mun.update_layout(
-    height=500,
-    width=500,
+    height= 450,
+    width= 450,
     margin=dict(t=10, l=10, r=10, b=10)
 )
 
 
 
 
-# %% 4. GRÁFICO DA QUANTIDADE DE COM. QUILOMBOLAS 
+# %% 4. GRÁFICO DA QUANTIDADE DE COM. QUILOMBOLAS ==========================================
 df_quilombos = df_filtrado.groupby('area_influencia', as_index=False)['comunidades_quilombolas'].sum()
 total_quilombos_filtrado = df_filtrado['comunidades_quilombolas'].sum()
 
@@ -247,7 +247,26 @@ fig_quilombos.update_layout(margin={"r": 0, "t": 20, "l": 0, "b": 0},
                             bargap=0.0)
 
 
-# %% 5. GRÁFICO DA QUANTIDADE DE FAMÍLIAS CIGANAS
+# %% 4.1. GRÁFICO SUNBURST COM. QUILOMBOLAS POR CIDADE 
+fig_quilombolas_mun = px.sunburst(
+    df_filtrado, 
+    path=['area_influencia', 'municipio'],
+    values='comunidades_quilombolas',
+    color='area_influencia',
+    color_discrete_map=mapa_de_cores,
+    hover_data={
+        'area_influencia': False,
+        'comunidades_quilombolas': True,
+        'quilombolas_valor': True
+    }
+)
+fig_quilombolas_mun.update_layout(
+    height= 450,
+    width= 450,
+    margin=dict(t=5, l=5, r=5, b=5)
+)
+
+# %% 5. GRÁFICO DA QUANTIDADE DE FAMÍLIAS CIGANAS ===============================================
 df_ciganos = df_filtrado.groupby('area_influencia', as_index=False)['familias_ciganas_MIR'].sum()
 total_ciganos_filtrado = df_filtrado['familias_ciganas_MIR'].sum()
 
@@ -420,7 +439,14 @@ with aba_principal:
         
   
     st.subheader("🏘️ Comunidades Quilombolas")
-    st.plotly_chart(fig_quilombos, use_container_width=True)
+    col_quilombolas_1, col_quilombolas_2 = st.columns(2)
+    
+    with col_quilombolas_1:
+        st.plotly_chart(fig_quilombos, use_container_width=True)
+        
+    with col_quilombolas_2:
+        st.plotly_chart(fig_quilombolas_mun, use_container_width=True)
+
 
     st.subheader("☸️ Famílias Ciganas")
     st.plotly_chart(fig_ciganos, use_container_width=True)
