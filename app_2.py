@@ -534,8 +534,8 @@ with aba_socioeconomica:
 # ==============================================================================
 
 with aba_ref:
-   st.subheader("📊 Notas Estatísticas (Base Geral)")
-    st.markdown("<br>", unsafe_allow_html=True)
+  st.subheader("📊 Notas Estatísticas (Base Geral)")
+  st.markdown("<br>", unsafe_allow_html=True)
     
     info_col1, info_col2, info_col3 = st.columns(3)
     
