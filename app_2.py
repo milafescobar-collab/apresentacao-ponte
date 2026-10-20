@@ -440,7 +440,7 @@ aba_principal, aba_socioeconomica, aba_ref = st.tabs(["🗺️ Visão Geral e Co
 # CONTEÚDO DA ABA 1: VISÃO GERAL
 # ==============================================================================
 with aba_principal:
-    st.subheader("Distribuição das Áreas de Influência")
+    st.subheader("🧭 Distribuição das Áreas de Influência")
     st.plotly_chart(fig, use_container_width=True)
     
     st.markdown("<br>", unsafe_allow_html=True)
