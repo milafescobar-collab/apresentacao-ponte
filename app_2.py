@@ -476,7 +476,17 @@ with aba_principal:
       
     st.divider()
 
-    
+    st.markdown("### 🌍 Recorte Geográfico")
+    st.markdown(
+            """
+            Municípios do Estado da Bahia impactados pelo empreendimento.  
+            Áreas de Influência classificadas de acordo com Relatório de Impacto Ambiental - RIMA.  
+            **Nomenclatura:** 
+            * **ADA:** Área diretamente afetada.
+            * **AID:** Área de influência direta.
+            * **AII:** Área de influência indireta.
+            """
+        )
    
 # ==============================================================================
 # CONTEÚDO DA ABA 2: ANÁLISE SOCIOECONÔMICA
