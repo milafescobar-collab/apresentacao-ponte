@@ -542,23 +542,9 @@ with aba_ref:
   
   st.divider()
 
-  info_col4, info_col5 = st.columns(2)
-  with info_col4:
-        st.markdown("### 🌍 Recorte Geográfico")
-        st.markdown(
-            """
-            Municípios do Estado da Bahia impactados pelo empreendimento.  
-            Áreas de Influência classificadas de acordo com Relatório de Impacto Ambiental - RIMA.  
-            **Nomenclatura:** 
-            * **ADA:** Área diretamente afetada.
-            * **AID:** Área de influência direta.
-            * **AII:** Área de influência indireta.
-            """
-        )
-    
-  with info_col5:
-        st.markdown("### 📌 Notas Metodológicas")
-        st.markdown(
+
+  st.markdown("### 📌 Notas Metodológicas")
+  st.markdown(
             """
             * **Fonte de Dados - Comunidades quilombolas e aldeias indígenas:** Censo Demográfico IBGE 2022.
             * **Fonte de Dados - Pescadores:** Ministério da Pesca e Aquicultura (Painel Unificado do RGP).
