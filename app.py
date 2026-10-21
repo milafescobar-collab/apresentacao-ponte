@@ -152,8 +152,9 @@ categorias_unicas_terrtorio = sorted(df['territorio_identidade'].unique())
 cores_territorio = ['#5B2260', '#384B43', '#B85723', '#FDBD59']
 mapa_cores_territorio = {cat: cores_territorio[i % len(cores_territorio)] for i, cat in enumerate(categorias_unicas_terrtorio)}
 
+# ABA VISÃO GERAL E COMUNIDADES ====================================================
 
-# %% 2. CONSTRUÇÃO DO MAPA INTERATIVO 
+# %% 2. CONSTRUÇÃO DO MAPA INTERATIVO ==============================================
 fig = px.choropleth_map(
     df_filtrado, 
     geojson=geojson_bahia,
@@ -179,7 +180,8 @@ fig = px.choropleth_map(
 fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
 
 
-# %% 3. GRÁFICO DA QUANTIDADE DE PESCADORES
+# %% 3. GRÁFICO DA QUANTIDADE DE PESCADORES =======================================
+
 df_pescadores = df_filtrado.groupby('area_influencia', as_index=False)['Pescadores'].sum()
 total_pescadores_filtrado = df_filtrado['Pescadores'].sum()
 
@@ -197,11 +199,30 @@ fig_pescadores = px.bar(
     opacity=0.7  
 )
 fig_pescadores.update_layout(margin={"r": 0, "t": 20, "l": 0, "b": 0}, 
-                             height=300,
+                             height=500,
                              bargap=0.0)
 
+# %% 3.1. GRÁFICO SUNBURST PESCADORES POR CIDADE 
+fig_pesc_mun = px.sunburst(
+    df_filtrado, 
+    path=['area_influencia', 'municipio'],
+    values='Pescadores',
+    color='area_influencia',
+    color_discrete_map=mapa_de_cores,
+    hover_data={
+        'area_influencia': False,
+        'Pescadores': True,
+        'ARTESANAL': True,
+        'INDUSTRIAL': True,
+    }
+)
+fig_pesc_mun.update_layout(
+    height= 450,
+    width= 450,
+    margin=dict(t=10, l=10, r=10, b=10)
+)
 
-# %% 4. GRÁFICO DA QUANTIDADE DE COM. QUILOMBOLAS 
+# %% 4. GRÁFICO DA QUANTIDADE DE COM. QUILOMBOLAS ==========================================
 df_quilombos = df_filtrado.groupby('area_influencia', as_index=False)['comunidades_quilombolas'].sum()
 total_quilombos_filtrado = df_filtrado['comunidades_quilombolas'].sum()
 
@@ -219,11 +240,30 @@ fig_quilombos = px.bar(
     opacity=0.7  
 )
 fig_quilombos.update_layout(margin={"r": 0, "t": 20, "l": 0, "b": 0}, 
-                            height=300,
+                            height=500,
                             bargap=0.0)
 
 
-# %% 5. GRÁFICO DA QUANTIDADE DE FAMÍLIAS CIGANAS
+# %% 4.1. GRÁFICO SUNBURST COM. QUILOMBOLAS POR CIDADE 
+fig_quilombolas_mun = px.sunburst(
+    df_filtrado, 
+    path=['area_influencia', 'municipio'],
+    values='comunidades_quilombolas',
+    color='area_influencia',
+    color_discrete_map=mapa_de_cores,
+    hover_data={
+        'area_influencia': False,
+        'comunidades_quilombolas': True,
+        'quilombolas_valor': True
+    }
+)
+fig_quilombolas_mun.update_layout(
+    height= 450,
+    width= 450,
+    margin=dict(t=5, l=5, r=5, b=5)
+)
+
+# %% 5. GRÁFICO DA QUANTIDADE DE FAMÍLIAS CIGANAS ===============================================
 df_ciganos = df_filtrado.groupby('area_influencia', as_index=False)['familias_ciganas_MIR'].sum()
 total_ciganos_filtrado = df_filtrado['familias_ciganas_MIR'].sum()
 
@@ -241,10 +281,30 @@ fig_ciganos = px.bar(
     opacity=0.7  
 )
 fig_ciganos.update_layout(margin={"r": 0, "t": 20, "l": 0, "b": 0}, 
-                             height=300,
+                             height=500,
                              bargap=0.0)
 
 
+# %% 5.1. GRÁFICO SUNBURST COM. CIGANOS POR CIDADE 
+fig_ciganos_mun = px.sunburst(
+    df_filtrado, 
+    path=['area_influencia', 'municipio'],
+    values='familias_ciganas_MIR',
+    color='area_influencia',
+    color_discrete_map=mapa_de_cores,
+    hover_data={
+        'area_influencia': False,
+        'familias_ciganas_MIR': True,
+        'ciganos_MIR': True
+    }
+)
+fig_ciganos_mun.update_layout(
+    height= 450,
+    width= 450,
+    margin=dict(t=5, l=5, r=5, b=5)
+)
+
+# ABA INDICADORES SOCIOECONÔMICOS ==================================================
 
 # %% 6. MAPA INTERATIVO COM AS REGIÕES SOCIOECONOMICAS 
 fig_mapa_reg = px.choropleth_map(
@@ -372,61 +432,52 @@ fig_mapa_bpc.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
 # CRIAÇÃO DAS ABAS DO STREAMLIT
 # =================================================================================
 
-aba_principal, aba_socioeconomica = st.tabs(["🗺️ Visão Geral e Comunidades", "📈 Indicadores Socioeconômicos"])
+aba_principal, aba_socioeconomica, aba_ref = st.tabs(["🗺️ Visão Geral e Comunidades", 
+                                                      "📈 Indicadores Socioeconômicos",
+                                                      "📜 Notas estatísticas e Referências"])
 
 # ==============================================================================
 # CONTEÚDO DA ABA 1: VISÃO GERAL
 # ==============================================================================
 with aba_principal:
-    st.subheader("Distribuição das Áreas de Influência")
+    st.subheader("🧭 Distribuição das Áreas de Influência")
     st.plotly_chart(fig, use_container_width=True)
     
     st.markdown("<br>", unsafe_allow_html=True)
     
     st.subheader("🚣 Pescadores")
-    st.plotly_chart(fig_pescadores, use_container_width=True)
+    col_pesc_1, col_pesc_2 = st.columns(2)
     
+    with col_pesc_1:
+        st.plotly_chart(fig_pescadores, use_container_width=True)
+        
+    with col_pesc_2:
+        st.plotly_chart(fig_pesc_mun, use_container_width=True)
+        
+  
     st.subheader("🏘️ Comunidades Quilombolas")
-    st.plotly_chart(fig_quilombos, use_container_width=True)
+    col_quilombolas_1, col_quilombolas_2 = st.columns(2)
+    
+    with col_quilombolas_1:
+        st.plotly_chart(fig_quilombos, use_container_width=True)
+        
+    with col_quilombolas_2:
+        st.plotly_chart(fig_quilombolas_mun, use_container_width=True)
+
 
     st.subheader("☸️ Famílias Ciganas")
-    st.plotly_chart(fig_ciganos, use_container_width=True)
+    col_ciganos_1, col_ciganos_2 = st.columns(2)
+  
+    with col_ciganos_1:
+        st.plotly_chart(fig_ciganos, use_container_width=True)
+        
+    with col_ciganos_2:
+        st.plotly_chart(fig_ciganos_mun, use_container_width=True)
       
     st.divider()
-    
-    st.subheader("📊 Notas Estatísticas (Base Geral)")
-    st.markdown("<br>", unsafe_allow_html=True)
-    
-    info_col1, info_col2, info_col3 = st.columns(3)
-    
-    with info_col1:
-        st.markdown("#### 🚣 Pescadores")
-        st.markdown(
-            f"""
-            * **Total no Filtro:** {total_pescadores_filtrado:,.0f}
-            * Total geral da base (74.668) representa **42,2%** da Bahia.
-            """
-        )
-            
-    with info_col2:
-        st.markdown("##### ⛺ Comunidades Indígenas")
-        st.markdown(
-            """
-            * Total de aldeias indígenas = 4 (2 em Camaçari e 2 em Camamú).  
-            * Representa **1,1%** do total do estado da Bahia.
-            """
-        )
-        
-    with info_col3:
-        st.markdown("##### 🏘️ Comunidades Quilombolas")
-        st.markdown(
-            f"""
-            * **Total no Filtro:** {total_quilombos_filtrado:,.0f}
-            * Total geral da base (283) representa **15,6%** da Bahia.
-            """
-        )
 
-
+    
+   
 # ==============================================================================
 # CONTEÚDO DA ABA 2: ANÁLISE SOCIOECONÔMICA
 # ==============================================================================
@@ -475,6 +526,43 @@ with aba_socioeconomica:
             * **Fonte de Dados - Comunidades quilombolas e aldeias indígenas:** Censo Demográfico IBGE 2022.
             * **Fonte de Dados - Pescadores:** Ministério da Pesca e Aquicultura (Painel Unificado do RGP).
             * **Indicadores socioeconômicos:** SEI Bahia.
+            """
+        )
+
+# ==============================================================================
+# CONTEÚDO DA ABA 3: ESTATÍSTICAS E REFERÊNCIAS
+# ==============================================================================
+
+with aba_ref:
+  st.subheader("📊 Notas Estatísticas (Base Geral)")
+  st.markdown("<br>", unsafe_allow_html=True)
+  
+  info_col1, info_col2, info_col3 = st.columns(3)
+  
+  with info_col1:
+    st.markdown("#### 🚣 Pescadores")
+    st.markdown(
+            f"""
+            * **Total no Filtro:** {total_pescadores_filtrado:,.0f}
+            * Total geral da base (74.668) representa **42,2%** da Bahia.
+            """
+        )
+            
+  with info_col2:
+    st.markdown("##### ⛺ Comunidades Indígenas")
+    st.markdown(
+            """
+            * Total de aldeias indígenas = 4 (2 em Camaçari e 2 em Camamú).  
+            * Representa **1,1%** do total do estado da Bahia.
+            """
+        )
+        
+  with info_col3:
+    st.markdown("##### 🏘️ Comunidades Quilombolas")
+    st.markdown(
+            f"""
+            * **Total no Filtro:** {total_quilombos_filtrado:,.0f}
+            * Total geral da base (283) representa **15,6%** da Bahia.
             """
         )
 
