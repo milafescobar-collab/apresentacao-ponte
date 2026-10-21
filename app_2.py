@@ -539,12 +539,11 @@ with aba_ref:
             * Total geral da base (283) representa **15,6%** da Bahia.
             """
         )
+  
+  st.divider()
 
- st.divider()
-    
-    info_col4, info_col5 = st.columns(2)
-    
-    with info_col4:
+  info_col4, info_col5 = st.columns(2)
+  with info_col4:
         st.markdown("### 🌍 Recorte Geográfico")
         st.markdown(
             """
@@ -556,7 +555,8 @@ with aba_ref:
             * **AII:** Área de influência indireta.
             """
         )
-    with info_col5:
+    
+  with info_col5:
         st.markdown("### 📌 Notas Metodológicas")
         st.markdown(
             """
