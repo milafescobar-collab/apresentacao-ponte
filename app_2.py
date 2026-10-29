@@ -428,13 +428,18 @@ fig_mapa_bpc = px.choropleth_map(
 fig_mapa_bpc.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
 
 
+
+
+
 # %% ==============================================================================
 # CRIAÇÃO DAS ABAS DO STREAMLIT
 # =================================================================================
 
-aba_principal, aba_socioeconomica, aba_ref = st.tabs(["🗺️ Visão Geral e Comunidades", 
-                                                      "📈 Indicadores Socioeconômicos",
-                                                      "📜 Notas estatísticas e Referências"])
+aba_principal, aba_economia, aba_educ, aba_ecosol, aba_ref = st.tabs(["🗺️ Visão Geral e Comunidades Impactadas",
+                                                                      "📈 Indicadores Econômicos",
+                                                                      "🎓 Educação e Qualificação Profissional",
+                                                                      "👩‍🔧Empreendimentos Econômicos Solidários",
+                                                                      "📜 Notas estatísticas e Referências"])
 
 # ==============================================================================
 # CONTEÚDO DA ABA 1: VISÃO GERAL
@@ -489,9 +494,9 @@ with aba_principal:
         )
    
 # ==============================================================================
-# CONTEÚDO DA ABA 2: ANÁLISE SOCIOECONÔMICA
+# CONTEÚDO DA ABA 2: INDICADORES ECONÔMICOS
 # ==============================================================================
-with aba_socioeconomica:
+with aba_economia:
     st.subheader("Territórios de Identidade e Cidades impactadas")
     qtd_municipios_filtrados = df_filtrado['municipio'].nunique()
     st.markdown(f"**{qtd_municipios_filtrados} Cidades selecionadas no filtro atual**")
@@ -502,19 +507,33 @@ with aba_socioeconomica:
     
     st.subheader("Produto Interno Bruto - PIB (2023)")
     st.plotly_chart(fig_tm_PIB_ai, use_container_width=True)
-    
-    col_mapa_1, col_mapa_2 = st.columns(2)
-    
-    with col_mapa_1:
+  
+    st.subheader("Estoque de Empregos formais - RAIS 2025")
+    st.plotly_chart(fig_emp, use_container_width=True)
+      
+# ==============================================================================
+# CONTEÚDO DA ABA 3: QUALIFICAÇÃO PROFISSIONAL E DADOS DE EDUCAÇÃO
+# ==============================================================================
+
+with aba_educ:
         st.subheader("Taxa de Analfabetismo (%)")
         st.plotly_chart(fig_mapa_edu, use_container_width=True)
-        
-    with col_mapa_2:
-        st.subheader("Estoque de Empregos formais - RAIS 2025")
-        st.plotly_chart(fig_emp, use_container_width=True)
+      
+
+
+
+
+# ==============================================================================
+# CONTEÚDO DA ABA 5: ECONOMIA SOLIDÁRIA
+# ==============================================================================
+
+with aba_ecosol:
+        st.subheader("Taxa de Analfabetismo (%)")
+        st.plotly_chart(fig_mapa_edu, use_container_width=True)
+      
         
 # ==============================================================================
-# CONTEÚDO DA ABA 3: ESTATÍSTICAS E REFERÊNCIAS
+# CONTEÚDO DA ABA 4: ESTATÍSTICAS E REFERÊNCIAS
 # ==============================================================================
 
 with aba_ref:
