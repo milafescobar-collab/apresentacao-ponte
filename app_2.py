@@ -528,8 +528,8 @@ with aba_educ:
 # ==============================================================================
 
 with aba_ecosol:
-        st.subheader("Taxa de Analfabetismo (%)")
-        st.plotly_chart(fig_mapa_edu, use_container_width=True)
+        st.subheader("BPC (%)")
+        st.plotly_chart(fig_mapa_bpc, use_container_width=True)
       
         
 # ==============================================================================
