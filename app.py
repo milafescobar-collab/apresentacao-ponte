@@ -476,7 +476,17 @@ with aba_principal:
       
     st.divider()
 
-    
+    st.markdown("### 🌍 Recorte Geográfico")
+    st.markdown(
+            """
+            Municípios do Estado da Bahia impactados pelo empreendimento.  
+            Áreas de Influência classificadas de acordo com Relatório de Impacto Ambiental - RIMA.  
+            **Nomenclatura:** 
+            * **ADA:** Área diretamente afetada.
+            * **AID:** Área de influência direta.
+            * **AII:** Área de influência indireta.
+            """
+        )
    
 # ==============================================================================
 # CONTEÚDO DA ABA 2: ANÁLISE SOCIOECONÔMICA
@@ -503,32 +513,6 @@ with aba_socioeconomica:
         st.subheader("Estoque de Empregos formais - RAIS 2025")
         st.plotly_chart(fig_emp, use_container_width=True)
         
-    st.divider()
-    
-    info_col4, info_col5 = st.columns(2)
-    
-    with info_col4:
-        st.markdown("### 🌍 Recorte Geográfico")
-        st.markdown(
-            """
-            Municípios do Estado da Bahia impactados pelo empreendimento.  
-            Áreas de Influência classificadas de acordo com Relatório de Impacto Ambiental - RIMA.  
-            **Nomenclatura:** 
-            * **ADA:** Área diretamente afetada.
-            * **AID:** Área de influência direta.
-            * **AII:** Área de influência indireta.
-            """
-        )
-    with info_col5:
-        st.markdown("### 📌 Notas Metodológicas")
-        st.markdown(
-            """
-            * **Fonte de Dados - Comunidades quilombolas e aldeias indígenas:** Censo Demográfico IBGE 2022.
-            * **Fonte de Dados - Pescadores:** Ministério da Pesca e Aquicultura (Painel Unificado do RGP).
-            * **Indicadores socioeconômicos:** SEI Bahia.
-            """
-        )
-
 # ==============================================================================
 # CONTEÚDO DA ABA 3: ESTATÍSTICAS E REFERÊNCIAS
 # ==============================================================================
@@ -563,6 +547,18 @@ with aba_ref:
             f"""
             * **Total no Filtro:** {total_quilombos_filtrado:,.0f}
             * Total geral da base (283) representa **15,6%** da Bahia.
+            """
+        )
+  
+  st.divider()
+
+
+  st.markdown("### 📌 Notas Metodológicas")
+  st.markdown(
+            """
+            * **Fonte de Dados - Comunidades quilombolas e aldeias indígenas:** Censo Demográfico IBGE 2022.
+            * **Fonte de Dados - Pescadores:** Ministério da Pesca e Aquicultura (Painel Unificado do RGP).
+            * **Indicadores socioeconômicos:** SEI Bahia.
             """
         )
 
