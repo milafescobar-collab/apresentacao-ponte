@@ -463,7 +463,7 @@ with aba_principal:
         )
 
     st.divider()
-  -
+  
     st.subheader("🚣 Pescadores")
     col_pesc_1, col_pesc_2 = st.columns(2)
     with col_pesc_1:
