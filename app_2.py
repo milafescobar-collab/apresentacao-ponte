@@ -154,7 +154,7 @@ mapa_cores_territorio = {cat: cores_territorio[i % len(cores_territorio)] for i,
 
 # ABA VISÃO GERAL E COMUNIDADES ====================================================
 
-# %% 2. CONSTRUÇÃO DO MAPA INTERATIVO ==============================================
+# %% 2. GRÁFICO ÁREAS DE INFLUÊNCIA ==============================================
 fig = px.choropleth_map(
     df_filtrado, 
     geojson=geojson_bahia,
