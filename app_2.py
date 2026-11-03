@@ -496,16 +496,18 @@ with aba_principal:
 # CONTEÚDO DA ABA 2: INDICADORES ECONÔMICOS
 # ==============================================================================
 with aba_economia:
-    st.subheader("Territórios de Identidade e Cidades impactadas")
+    st.subheader("Territórios de Identidade Afetados")
     qtd_municipios_filtrados = df_filtrado['municipio'].nunique()
     st.markdown(f"**{qtd_municipios_filtrados} Cidades selecionadas no filtro atual**")
     st.plotly_chart(fig_mapa_reg, use_container_width=True)
-      
-    st.subheader("População (2025)")
-    st.plotly_chart(fig_pop, use_container_width=True)
-    
-    st.subheader("Produto Interno Bruto - PIB (2023)")
-    st.plotly_chart(fig_tm_PIB_ai, use_container_width=True)
+
+    col_pop, col_pib = st.columns(2)
+    with col_pop:
+      st.subheader("População (2025)")
+      st.plotly_chart(fig_pop, use_container_width=True)
+    with col_pip:
+      st.subheader("Produto Interno Bruto - PIB (2023)")
+      st.plotly_chart(fig_tm_PIB_ai, use_container_width=True)
   
     st.subheader("Estoque de Empregos formais - RAIS 2025")
     st.plotly_chart(fig_emp, use_container_width=True)
