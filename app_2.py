@@ -446,11 +446,11 @@ aba_principal, aba_economia, aba_educ, aba_ecosol, aba_ref = st.tabs(["🗺️ V
 # ==============================================================================
 with aba_principal:
   
-    st.subheader("🧭 Distribuição das Áreas de Influência")
+    st.subheader(" 🌍 Distribuição das Áreas de Influência")
     st.plotly_chart(fig, use_container_width=True)
     st.markdown("<br>", unsafe_allow_html=True)
 
-    st.markdown("### 🌍 Recorte Geográfico")
+    st.markdown("#### Recorte Geográfico")
     st.markdown(
             """
             Municípios do Estado da Bahia impactados pelo empreendimento.  
@@ -471,22 +471,21 @@ with aba_principal:
     with col_pesc_2:
         st.plotly_chart(fig_pesc_mun, use_container_width=True)
         
+    st.divider()
   
     st.subheader("🏘️ Comunidades Quilombolas")
     col_quilombolas_1, col_quilombolas_2 = st.columns(2)
-  
     with col_quilombolas_1:
         st.plotly_chart(fig_quilombos, use_container_width=True)
     with col_quilombolas_2:
         st.plotly_chart(fig_quilombolas_mun, use_container_width=True)
 
+    st.divider()
 
     st.subheader("☸️ Famílias Ciganas")
     col_ciganos_1, col_ciganos_2 = st.columns(2)
-  
     with col_ciganos_1:
         st.plotly_chart(fig_ciganos, use_container_width=True)
-        
     with col_ciganos_2:
         st.plotly_chart(fig_ciganos_mun, use_container_width=True)
       
