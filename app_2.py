@@ -447,13 +447,11 @@ aba_principal, aba_economia, aba_educ, aba_ecosol, aba_ref = st.tabs(["🗺️ V
 with aba_principal:
   
     st.subheader("🧭 Distribuição das Áreas de Influência")
-    col_ai_1, col_ai_2 = st.columns(2)
-    with col_ai_1:
-        st.plotly_chart(fig, use_container_width=True)
-        st.markdown("<br>", unsafe_allow_html=True)
-    with col_ai_2:
-        st.markdown("### 🌍 Recorte Geográfico")
-        st.markdown(
+    st.plotly_chart(fig, use_container_width=True)
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    st.markdown("### 🌍 Recorte Geográfico")
+    st.markdown(
             """
             Municípios do Estado da Bahia impactados pelo empreendimento.  
             Áreas de Influência classificadas de acordo com Relatório de Impacto Ambiental - RIMA.  
@@ -464,7 +462,8 @@ with aba_principal:
             """
         )
 
-    
+    st.divider()
+  -
     st.subheader("🚣 Pescadores")
     col_pesc_1, col_pesc_2 = st.columns(2)
     with col_pesc_1:
