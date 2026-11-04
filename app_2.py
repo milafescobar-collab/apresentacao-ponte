@@ -55,7 +55,6 @@ df_bahia = cod_municipios[cod_municipios['codigo_uf'] == 29].copy()
 with open("dados/geojs-29-mun.json", "r", encoding="utf-8") as f:
     geojson_bahia = json.load(f)
 
-
 # %% ==============================================================================
 # AJUSTES DF
 # =================================================================================
@@ -93,6 +92,7 @@ df['PIB_per_capita_valor'] = df['PIB_per_capita_valor'].str.replace(',', '.').as
 df['VAB_com_serv_2021'] = df['VAB_com_serv_2021'].str.replace(',', '.').astype(float)
 df['VAB_agro_2021'] = df['VAB_agro_2021'].str.replace(',', '.').astype(float)
 df['VAB_ind_2021'] = df['VAB_ind_2021'].str.replace(',', '.').astype(float)
+
 
 # %% ==============================================================================
 # BARRA LATERAL COM FILTROS
@@ -139,9 +139,9 @@ if df_filtrado.empty:
     st.warning("⚠️ Nenhum município corresponde aos filtros selecionados. Por favor, revise a seleção na barra lateral.")
     st.stop()
 
-# %% ==============================================================================
+# %% ==========================================================================
 # GRÁFICOS
-# =================================================================================
+# =============================================================================
 
 # %% 1. MAPEAMENTO DE CORES CATEGÓRICAS 
 categorias_unicas = sorted(df['area_influencia'].unique())
@@ -152,9 +152,9 @@ categorias_unicas_terrtorio = sorted(df['territorio_identidade'].unique())
 cores_territorio = ['#5B2260', '#384B43', '#B85723', '#FDBD59']
 mapa_cores_territorio = {cat: cores_territorio[i % len(cores_territorio)] for i, cat in enumerate(categorias_unicas_terrtorio)}
 
-# ABA VISÃO GERAL E COMUNIDADES ====================================================
+# ABA VISÃO GERAL E COMUNIDADES ===============================================
 
-# %% 2. GRÁFICO ÁREAS DE INFLUÊNCIA ==============================================
+# %% 2. GRÁFICO ÁREAS DE INFLUÊNCIA ===========================================
 fig = px.choropleth_map(
     df_filtrado, 
     geojson=geojson_bahia,
@@ -180,7 +180,9 @@ fig = px.choropleth_map(
 fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
 
 
-# %% 3. GRÁFICO DA QUANTIDADE DE PESCADORES =======================================
+# %% PESCADORES
+
+# 3.1 GRÁFICO DE BARRAS - QUANTIDADE DE PESCADORES ============================
 
 df_pescadores = df_filtrado.groupby('area_influencia', as_index=False)['Pescadores'].sum()
 total_pescadores_filtrado = df_filtrado['Pescadores'].sum()
@@ -202,7 +204,10 @@ fig_pescadores.update_layout(margin={"r": 0, "t": 20, "l": 0, "b": 0},
                              height=500,
                              bargap=0.0)
 
-# %% 3.1. GRÁFICO SUNBURST PESCADORES POR CIDADE 
+
+
+# 3.2 GRÁFICO SUNBURST PESCADORES POR CIDADE===================================
+
 fig_pesc_mun = px.sunburst(
     df_filtrado, 
     path=['area_influencia', 'municipio'],
@@ -222,7 +227,11 @@ fig_pesc_mun.update_layout(
     margin=dict(t=10, l=10, r=10, b=10)
 )
 
-# %% 4. GRÁFICO DA QUANTIDADE DE COM. QUILOMBOLAS ==========================================
+
+# %% 4. COMUNIDADES QUILOMBOLAS
+
+# 4.1 GRÁFICO DA QUANTIDADE DE COM. QUILOMBOLAS ===============================
+
 df_quilombos = df_filtrado.groupby('area_influencia', as_index=False)['comunidades_quilombolas'].sum()
 total_quilombos_filtrado = df_filtrado['comunidades_quilombolas'].sum()
 
@@ -244,7 +253,8 @@ fig_quilombos.update_layout(margin={"r": 0, "t": 20, "l": 0, "b": 0},
                             bargap=0.0)
 
 
-# %% 4.1. GRÁFICO SUNBURST COM. QUILOMBOLAS POR CIDADE 
+
+# 4.2 GRÁFICO SUNBURST COM. QUILOMBOLAS POR CIDADE 
 fig_quilombolas_mun = px.sunburst(
     df_filtrado, 
     path=['area_influencia', 'municipio'],
@@ -263,7 +273,9 @@ fig_quilombolas_mun.update_layout(
     margin=dict(t=5, l=5, r=5, b=5)
 )
 
-# %% 5. GRÁFICO DA QUANTIDADE DE FAMÍLIAS CIGANAS ===============================================
+# %% 5.FAMÍLIAS CIGANAS
+
+# 5.1 GRÁFICO DA QUANTIDADE DE FAMÍLIAS CIGANAS ===============================================
 df_ciganos = df_filtrado.groupby('area_influencia', as_index=False)['familias_ciganas_MIR'].sum()
 total_ciganos_filtrado = df_filtrado['familias_ciganas_MIR'].sum()
 
@@ -285,7 +297,7 @@ fig_ciganos.update_layout(margin={"r": 0, "t": 20, "l": 0, "b": 0},
                              bargap=0.0)
 
 
-# %% 5.1. GRÁFICO SUNBURST COM. CIGANOS POR CIDADE 
+# 5.2 GRÁFICO SUNBURST COM. CIGANOS POR CIDADE 
 fig_ciganos_mun = px.sunburst(
     df_filtrado, 
     path=['area_influencia', 'municipio'],
@@ -304,9 +316,121 @@ fig_ciganos_mun.update_layout(
     margin=dict(t=5, l=5, r=5, b=5)
 )
 
+# %% 6. MAPA INTERATIVO DAS POPULAÇÕES QUILOMBOLA E CIGANA
+
+# a. Configuração das variáveis a exibir
+variaveis = [
+    {
+        "coluna": "quilombolas_valor",
+        "label": "População Quilombola",
+        "escala": "Plasma"
+    },
+    {
+        "coluna": "ciganos_MIR",
+        "label": "População Cigana",
+        "escala": "Plasma"  
+    },
+    {
+        "coluna": "indigenas_valor",
+        "label": "População Indígena",
+        "escala": "Plasma"
+    }
+]
+
+
+fig_mapa_pop_trad = go.Figure()
+
+# b. Adiciona um traço (layer) para cada variável
+for idx, var in enumerate(variaveis):
+    col = var["coluna"]
+    visivel = True if idx == 0 else False  # Apenas o primeiro começa visível
+    
+    # Texto de hover personalizado por município
+    hover_texto = [
+        f"<b>{muni}</b><br>"
+        f"Território: {terr}<br>"
+        f"Área de Influência: {area}<br>"
+        f"{var['label']}: {val:,}"
+        for muni, terr, area, val in zip(
+            df_filtrado["municipio"],
+            df_filtrado["territorio_identidade"],
+            df_filtrado["area_influencia"],
+            df_filtrado[col]
+        )
+    ]
+    
+    fig_mapa_pop_trad.add_trace(
+        go.Choroplethmap(
+            geojson=geojson_bahia,
+            locations=df_filtrado["codigo_ibge"],
+            featureidkey="properties.id",
+            z=df_filtrado[col],
+            colorscale=var["escala"],
+            zmin=float(df_filtrado[col].min()),
+            zmax=float(df_filtrado[col].max()),
+            name=var["label"],
+            visible=visivel,
+            text=hover_texto,
+            hoverinfo="text",
+            marker_opacity=0.7,
+            colorbar=dict(
+                title=dict(text=var["label"]),
+                x=1.02,
+                len=0.75
+            )
+        )
+    )
+
+# c. Monta os botões do Dropdown alternando a visibilidade
+
+botoes = []
+total_tracos = len(variaveis)
+
+for i, var in enumerate(variaveis):
+    # Vetor de visibilidade: [True, False, False], [False, True, False], etc.
+    visibilidade = [j == i for j in range(total_tracos)]
+    
+    botoes.append(
+        dict(
+            method="update",
+            label=var["label"],
+            args=[
+                {"visible": visibilidade},  # Alterna os traços
+                {"title.text": f"Distribuição: {var['label']}"}  # Atualiza título opcional
+            ]
+        )
+    )
+
+# 4. Configuração final de layout do mapa
+fig_mapa_pop_trad.update_layout(
+    title=dict(text=f"Distribuição: {variaveis[0]['label']}", x=0.05, y=0.95),
+    map=dict(
+        style="open-street-map",
+        center={"lat": -12.97, "lon": -38.50},
+        zoom=6
+    ),
+    updatemenus=[
+        dict(
+            buttons=botoes,
+            direction="down",
+            showactive=True,
+            x=0.02,
+            xanchor="left",
+            y=0.98,
+            yanchor="top",
+            bgcolor="white",
+            bordercolor="#cccccc"
+        )
+    ],
+    margin={"r": 0, "t": 40, "l": 0, "b": 0}
+)
+
+fig_mapa_pop_trad.show()
+
 # ABA INDICADORES SOCIOECONÔMICOS ==================================================
 
-# %% 6. MAPA INTERATIVO COM AS REGIÕES SOCIOECONOMICAS 
+# %% 6. MAPA INTERATIVO DOS TERRITÓRIOS DE IDENTIDADE
+
 fig_mapa_reg = px.choropleth_map(
     df_filtrado, 
     geojson=geojson_bahia,
@@ -391,7 +515,9 @@ fig_emp.update_layout(
 )
 
 
-# %% 10. MAPA DA TX ANALFABETISMO 
+# %% 10. MAPA INTERATIVO DA TX ANALFABETISMO 
+
+
 fig_mapa_edu = px.choropleth_map(
     df_filtrado, 
     geojson=geojson_bahia,
@@ -409,7 +535,7 @@ fig_mapa_edu = px.choropleth_map(
 )
 
 
-# %% 11. MAPA DA TX PESSOAS QUE RECEBEM BPC 
+# %% 11. MAPA INTERATIVO DA TX PESSOAS QUE RECEBEM BPC 
 fig_mapa_bpc = px.choropleth_map(
     df_filtrado, 
     geojson=geojson_bahia,
@@ -582,6 +708,9 @@ with aba_ref:
             * **Indicadores socioeconômicos:** SEI Bahia.
             """
         )
+
+
+
 
 
 
