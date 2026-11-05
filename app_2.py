@@ -425,7 +425,6 @@ fig_mapa_pop_trad.update_layout(
     margin={"r": 0, "t": 40, "l": 0, "b": 0}
 )
 
-fig_mapa_pop_trad.show()
 
 # ABA INDICADORES SOCIOECONÔMICOS ==================================================
 
