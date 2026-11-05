@@ -819,9 +819,12 @@ with aba_ref:
   st.markdown("### 📌 Notas Metodológicas")
   st.markdown(
             """
-            * **Fonte de Dados - Comunidades quilombolas e aldeias indígenas:** Censo Demográfico IBGE 2022.
-            * **Fonte de Dados - Pescadores:** Ministério da Pesca e Aquicultura (Painel Unificado do RGP).
-            * **Indicadores socioeconômicos:** SEI Bahia.
+            #### Fonte dos Dados:
+            * **Comunidade Cigana:** Base de dados disponibilizada pelo Ministério da Igualdade Racial (MIR).
+            * **Comunidades quilombolas e aldeias indígenas:** Censo Demográfico IBGE 2022.
+            * **Pescadores:** Ministério da Pesca e Aquicultura (Painel Unificado do RGP).
+            * **Indicadores socioeconômicos:** SEI Bahia Municípios.
+            * **Empreendimentos Econômicos Solidários:** Cadsol. Período de referência: set/2023 a set/2026.
             """
         )
 
