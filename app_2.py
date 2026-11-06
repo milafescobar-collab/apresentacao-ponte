@@ -728,6 +728,16 @@ with aba_principal:
       
     st.divider()
 
+  
+    st.subheader(" Distribuição Regional das Populações Tradicionais")
+    col_mapa_abs, col_mapa_rel = st.columns(2)
+    with col_mapa_abs:
+        st.markdown("#### População Total da Comunidade")
+        st.plotly_chart(fig_mapa_pop_trad, use_container_width=True)
+    with col_mapa_rel:
+        st.markdown("#### Proporção da População do Município (%)")
+        st.plotly_chart(fig_mapa_pop_trad_rel, use_container_width=True)
+
    
 # ==============================================================================
 # CONTEÚDO DA ABA 2: INDICADORES ECONÔMICOS
