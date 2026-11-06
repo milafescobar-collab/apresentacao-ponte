@@ -816,7 +816,7 @@ with aba_ref:
   st.markdown(
             """
             * **Comunidades quilombolas e aldeias indígenas:** Censo Demográfico IBGE 2022.
-            * **Comunidades Ciganas: Dados disponibilizados pelo Ministério de Igualdade Racial (MIR).**
+            * **Comunidades Ciganas:** Dados disponibilizados pelo Ministério de Igualdade Racial (MIR).
             * **Pescadores:** Ministério da Pesca e Aquicultura (Painel Unificado do RGP).
             * **Indicadores socioeconômicos:** SEI Bahia.
             """
