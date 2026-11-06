@@ -35,7 +35,7 @@ st.write("---")
 # IMPORTANDO ARQUIVO
 # =================================================================================
 
-tabela = pd.read_csv(r"C:\Users\camila.escobar\OneDrive - mtegovbr\Documentos\AEPIT\ponte Salvador-Itaparica\Informações MTE subsídio Ministro\dashboard\dados\dados_tabelados_pescadores.csv",
+tabela = pd.read_csv("dados/dados_tabelados_pescadores.csv",
                      encoding="latin-1",
                      sep=";")
 
@@ -43,20 +43,17 @@ tabela = pd.read_csv(r"C:\Users\camila.escobar\OneDrive - mtegovbr\Documentos\AE
 tabela.columns = tabela.columns.str.strip()
 
 # Carregar a base de dados de coordenadas do Brasil
-
-cod_municipios = pd.read_csv(r"C:\Users\camila.escobar\OneDrive - mtegovbr\Documentos\AEPIT\info\municipios.csv",
+cod_municipios = pd.read_csv("dados/municipios.csv",
                      encoding="latin-1",
                      sep = ";")
-
 
 ## Filtrar apenas o estado da Bahia (Código IBGE do estado da Bahia é 29)
 df_bahia = cod_municipios[cod_municipios['codigo_uf'] == 29].copy()
 
 
 # Carregar o arquivo GeoJSON baixado localmente ---
-with open(r"C:\Users\camila.escobar\OneDrive - mtegovbr\Documentos\AEPIT\ponte Salvador-Itaparica\Informações MTE subsídio Ministro\dashboard\dados\geojs-29-mun.json", "r", encoding="utf-8") as f:
+with open("dados/geojs-29-mun.json", "r", encoding="utf-8") as f:
     geojson_bahia = json.load(f)
-
 # %% ==============================================================================
 # AJUSTES DF
 # =================================================================================
