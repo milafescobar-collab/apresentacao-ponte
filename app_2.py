@@ -28,14 +28,14 @@ pio.renderers.default = 'browser'
 st.set_page_config(page_title="Meu Dashboard", layout="wide")
 st.title("Relatório de Impacto nas Áreas de Influência")
 st.subheader("Sistema Rodoviário Ponte Salvador - Ilha de Itaparica")
-# st.write("---")
+st.write("---")
 
 
 # %% ==============================================================================
 # IMPORTANDO ARQUIVO
 # =================================================================================
 
-tabela = pd.read_csv("dados/dados_tabelados_pescadores.csv",
+tabela = pd.read_csv(r"C:\Users\camila.escobar\OneDrive - mtegovbr\Documentos\AEPIT\ponte Salvador-Itaparica\Informações MTE subsídio Ministro\dashboard\dados\dados_tabelados_pescadores.csv",
                      encoding="latin-1",
                      sep=";")
 
@@ -43,16 +43,18 @@ tabela = pd.read_csv("dados/dados_tabelados_pescadores.csv",
 tabela.columns = tabela.columns.str.strip()
 
 # Carregar a base de dados de coordenadas do Brasil
-cod_municipios = pd.read_csv("dados/municipios.csv",
+
+cod_municipios = pd.read_csv(r"C:\Users\camila.escobar\OneDrive - mtegovbr\Documentos\AEPIT\info\municipios.csv",
                      encoding="latin-1",
                      sep = ";")
+
 
 ## Filtrar apenas o estado da Bahia (Código IBGE do estado da Bahia é 29)
 df_bahia = cod_municipios[cod_municipios['codigo_uf'] == 29].copy()
 
 
 # Carregar o arquivo GeoJSON baixado localmente ---
-with open("dados/geojs-29-mun.json", "r", encoding="utf-8") as f:
+with open(r"C:\Users\camila.escobar\OneDrive - mtegovbr\Documentos\AEPIT\ponte Salvador-Itaparica\Informações MTE subsídio Ministro\dashboard\dados\geojs-29-mun.json", "r", encoding="utf-8") as f:
     geojson_bahia = json.load(f)
 
 # %% ==============================================================================
@@ -532,7 +534,9 @@ fig_mapa_pop_trad_rel.update_layout(
 )
 
 
-# ABA INDICADORES SOCIOECONÔMICOS ==================================================
+
+
+# ABA INDICADORES SOCIOECONÔMICOS =============================================
 
 # %% 7. MAPA INTERATIVO DOS TERRITÓRIOS DE IDENTIDADE
 
@@ -568,7 +572,7 @@ fig_mapa_reg = px.choropleth_map(
 fig_mapa_reg.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
 
 
-# %% 7. TREEMAP com PIB 
+# %% 8. TREEMAP com PIB 
 fig_tm_PIB_ai = px.treemap(
     df_filtrado,
     path=['municipio', 'PIB'],
@@ -580,8 +584,8 @@ fig_tm_PIB_ai = px.treemap(
 fig_tm_PIB_ai.update_layout(margin=dict(t=50, l=25, r=25, b=25))
 
 
-# %% 8. TREEMAP POPULAÇÃO 
-total_pop_filtrada = int(df_filtrado["populacao_valor"].sum())
+# %% 9. TREEMAP POPULAÇÃO 
+total_pop_filtrada = df_filtrado['populacao_valor'].sum() if 'populacao_valor' in df_filtrado.columns else 0
 
 fig_pop = px.treemap(
     df_filtrado,
@@ -595,8 +599,7 @@ fig_pop = px.treemap(
 fig_pop.update_layout(margin=dict(t=50, l=25, r=25, b=25))
 
 
-
-# %% 9. GRÁFICO SUNBURST ESTOQUE EMPREGOS FORMAIS 
+# %% 10. GRÁFICO SUNBURST ESTOQUE EMPREGOS FORMAIS 
 fig_emp = px.sunburst(
     df_filtrado, 
     path=['area_influencia', 'municipio'],
@@ -621,7 +624,7 @@ fig_emp.update_layout(
 )
 
 
-# %% 10. MAPA INTERATIVO DA TX ANALFABETISMO 
+# %% 11. MAPA INTERATIVO DA TX ANALFABETISMO 
 
 
 fig_mapa_edu = px.choropleth_map(
@@ -640,8 +643,13 @@ fig_mapa_edu = px.choropleth_map(
     opacity=0.7
 )
 
+fig_mapa_edu.update_layout(
+    height=500,
+    width=700,
+    margin=dict(t=10, l=10, r=10, b=10)
+)
 
-# %% 11. MAPA INTERATIVO DA TX PESSOAS QUE RECEBEM BPC 
+# %% 12. MAPA INTERATIVO DA TX PESSOAS QUE RECEBEM BPC 
 fig_mapa_bpc = px.choropleth_map(
     df_filtrado, 
     geojson=geojson_bahia,
@@ -663,9 +671,9 @@ fig_mapa_bpc.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
 
 
 
-# %% ==============================================================================
+# %% ==========================================================================
 # CRIAÇÃO DAS ABAS DO STREAMLIT
-# =================================================================================
+# =============================================================================
 
 aba_principal, aba_economia, aba_educ, aba_ecosol, aba_ref = st.tabs(["🗺️ Visão Geral e Comunidades Impactadas",
                                                                       "📈 Indicadores Econômicos",
@@ -722,19 +730,8 @@ with aba_principal:
         st.plotly_chart(fig_ciganos_mun, use_container_width=True)
       
     st.divider()
-  
-    st.subheader(" Distribuição Regional das Populações Tradicionais")
-    col_mapa_abs, col_mapa_rel = st.columns(2)
-    with col_mapa_abs:
-        st.markdown("#### População Total da Comunidade")
-        st.plotly_chart(fig_mapa_pop_trad, use_container_width=True)
-    with col_mapa_rel:
-        st.markdown("#### Proporção da População do Município (%)")
-        st.plotly_chart(fig_mapa_pop_trad_rel, use_container_width=True)
-      
+
    
-  
-    
 # ==============================================================================
 # CONTEÚDO DA ABA 2: INDICADORES ECONÔMICOS
 # ==============================================================================
@@ -820,17 +817,11 @@ with aba_ref:
   st.markdown("### 📌 Notas Metodológicas")
   st.markdown(
             """
-            #### Fonte dos Dados:
-            * **Comunidade Cigana:** Base de dados disponibilizada pelo Ministério da Igualdade Racial (MIR).
-            * **Comunidades quilombolas e aldeias indígenas:** Censo Demográfico IBGE 2022.
-            * **Pescadores:** Ministério da Pesca e Aquicultura (Painel Unificado do RGP).
-            * **Indicadores socioeconômicos:** SEI Bahia Municípios.
-            * **Empreendimentos Econômicos Solidários:** Cadsol. Período de referência: set/2023 a set/2026.
+            * **Fonte de Dados - Comunidades quilombolas e aldeias indígenas:** Censo Demográfico IBGE 2022.
+            * **Fonte de Dados - Pescadores:** Ministério da Pesca e Aquicultura (Painel Unificado do RGP).
+            * **Indicadores socioeconômicos:** SEI Bahia.
             """
         )
-
-
-
 
 
 
