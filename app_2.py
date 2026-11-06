@@ -589,10 +589,11 @@ fig_pop = px.treemap(
     values='populacao_valor', 
     color='area_influencia',
     color_discrete_map=mapa_de_cores,
-    # title=f'População Selecionada: {total_pop_filtrada:,.0f}'.replace(',', '.'),
+    title=f'População Selecionada: {total_pop_filtrada:,.0f}'.replace(',', '.'),
     hover_data={'area_influencia': True}
 )
 fig_pop.update_layout(margin=dict(t=50, l=25, r=25, b=25))
+
 
 
 # %% 9. GRÁFICO SUNBURST ESTOQUE EMPREGOS FORMAIS 
