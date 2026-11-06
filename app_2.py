@@ -812,7 +812,7 @@ with aba_ref:
 
 
   st.subheader(" 📌 Notas Metodológicas")
-  st.markdown("### Fonte dos Dados"
+  st.markdown("### Fonte dos Dados")
   st.markdown(
             """
             * **Comunidades quilombolas e aldeias indígenas:** Censo Demográfico IBGE 2022.
