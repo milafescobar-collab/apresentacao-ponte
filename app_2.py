@@ -581,7 +581,7 @@ fig_tm_PIB_ai.update_layout(margin=dict(t=50, l=25, r=25, b=25))
 
 
 # %% 8. TREEMAP POPULAÇÃO 
-total_pop_filtrada = df_filtrado['populacao_valor'].sum() if 'populacao_valor' in df_filtrado.columns else 0
+total_pop_filtrada = int(df_filtrado["populacao_valor"].sum())
 
 fig_pop = px.treemap(
     df_filtrado,
