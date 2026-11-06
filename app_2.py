@@ -811,11 +811,13 @@ with aba_ref:
   st.divider()
 
 
-  st.markdown("### 📌 Notas Metodológicas")
+  st.subheader(" 📌 Notas Metodológicas")
+  st.markdown("### Fonte dos Dados"
   st.markdown(
             """
-            * **Fonte de Dados - Comunidades quilombolas e aldeias indígenas:** Censo Demográfico IBGE 2022.
-            * **Fonte de Dados - Pescadores:** Ministério da Pesca e Aquicultura (Painel Unificado do RGP).
+            * **Comunidades quilombolas e aldeias indígenas:** Censo Demográfico IBGE 2022.
+            * **Comunidades Ciganas: Dados disponibilizados pelo Ministério de Igualdade Racial (MIR).**
+            * **Pescadores:** Ministério da Pesca e Aquicultura (Painel Unificado do RGP).
             * **Indicadores socioeconômicos:** SEI Bahia.
             """
         )
