@@ -747,14 +747,12 @@ with aba_economia:
     qtd_municipios_filtrados = df_filtrado['municipio'].nunique()
     st.markdown(f"**{qtd_municipios_filtrados} Cidades selecionadas no filtro atual**")
     st.plotly_chart(fig_mapa_reg, use_container_width=True)
+  
+    st.subheader("População (2025)")
+    st.plotly_chart(fig_pop, use_container_width=True)
 
-    col_pop, col_pib = st.columns(2)
-    with col_pop:
-        st.subheader("População (2025)")
-        st.plotly_chart(fig_pop, use_container_width=True)
-    with col_pib:
-        st.subheader("Produto Interno Bruto - PIB (2023)")
-        st.plotly_chart(fig_tm_PIB_ai, use_container_width=True)
+    st.subheader("Produto Interno Bruto - PIB (2023)")
+    st.plotly_chart(fig_tm_PIB_ai, use_container_width=True)
   
     
     st.subheader("Estoque de Empregos formais - RAIS 2025")
@@ -826,7 +824,7 @@ with aba_ref:
   st.markdown(
             """
             * **Comunidades quilombolas e aldeias indígenas:** Censo Demográfico IBGE 2022.
-            * **Comunidades Ciganas:** Dados disponibilizados pelo Ministério de Igualdade Racial (MIR).
+            * **Comunidades Ciganas:** Dados disponibilizados pelo Ministério da Igualdade Racial (MIR).
             * **Pescadores:** Ministério da Pesca e Aquicultura (Painel Unificado do RGP).
             * **Indicadores socioeconômicos:** SEI Bahia.
             """
