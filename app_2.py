@@ -876,8 +876,6 @@ with aba_economia:
 
 with aba_educ:
         st.subheader("Taxa de Analfabetismo (%)")
-        total_empsol = df_filtrado['empsol_total'].sum() if 'empsol_total' in df_filtrado.columns else 0
-        st.markdown(f"**{total_empsol} Total de Empreendimentos solidários**")
         st.plotly_chart(fig_mapa_edu, use_container_width=True)
       
 
@@ -887,6 +885,8 @@ with aba_educ:
 
 with aba_ecosol:
         st.subheader("Distribuição de Empreendimentos Econômicos Solidários")
+        total_empsol = df_filtrado['empsol_total'].sum() if 'empsol_total' in df_filtrado.columns else 0
+        st.markdown(f"**{total_empsol} Total de Empreendimentos solidários**")
         st.plotly_chart(fig_mapa_empsol, use_container_width=True)
       
         
