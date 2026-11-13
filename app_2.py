@@ -880,18 +880,18 @@ with aba_educ:
       
 
 # ==============================================================================
-# CONTEÚDO DA ABA 5: ECONOMIA SOLIDÁRIA
+# CONTEÚDO DA ABA 4: ECONOMIA SOLIDÁRIA
 # ==============================================================================
 
 with aba_ecosol:
         st.subheader("Distribuição de Empreendimentos Econômicos Solidários")
         total_empsol = df_filtrado['empsol_total'].sum() if 'empsol_total' in df_filtrado.columns else 0
-        st.markdown(f"**{total_empsol} Total de Empreendimentos solidários**")
+        st.markdown(f"**Total de Empreendimentos solidários: {total_empsol} **")
         st.plotly_chart(fig_mapa_empsol, use_container_width=True)
       
         
 # ==============================================================================
-# CONTEÚDO DA ABA 4: ESTATÍSTICAS E REFERÊNCIAS
+# CONTEÚDO DA ABA 5: ESTATÍSTICAS E REFERÊNCIAS
 # ==============================================================================
 
 with aba_ref:
