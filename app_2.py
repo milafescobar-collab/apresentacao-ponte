@@ -665,6 +665,117 @@ fig_mapa_bpc = px.choropleth_map(
 fig_mapa_bpc.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
 
 
+# %% 13. EMPREENDIMENTOSECONÔMICOS SOLIDÁROS
+
+
+# 13.1 MAPA INTERATIVO VALOR TOTAL
+# a. Configuração das variáveis a exibir
+variaveis = [
+    {
+        "coluna": "empsol_total",
+        "label": "Total",
+        "escala": "Plasma"
+    },
+    {
+        "coluna": "empsol_aprovado",
+        "label": "Aprovados",
+        "escala": "Plasma"  
+    },
+    {
+        "coluna": "empsol_processo_aprovacao",
+        "label": "Processo de Aprovação",
+        "escala": "Plasma"
+    }
+]
+
+
+fig_mapa_empsol = go.Figure()
+
+# b. Adiciona um traço (layer) para cada variável
+for idx, var in enumerate(variaveis):
+    col = var["coluna"]
+    visivel = True if idx == 0 else False  # Apenas o primeiro começa visível
+    
+    # Texto de hover personalizado por município
+    hover_texto = [
+        f"<b>{muni}</b><br>"
+        f"Território: {terr}<br>"
+        f"Área de Influência: {area}<br>"
+        f"{var['label']}: {val:,}"
+        for muni, terr, area, val in zip(
+            df_filtrado["municipio"],
+            df_filtrado["territorio_identidade"],
+            df_filtrado["area_influencia"],
+            df_filtrado[col]
+        )
+    ]
+    
+    fig_mapa_empsol.add_trace(
+        go.Choroplethmap(
+            geojson=geojson_bahia,
+            locations=df_filtrado["codigo_ibge"],
+            featureidkey="properties.id",
+            z=df_filtrado[col],
+            colorscale=var["escala"],
+            zmin=float(df_filtrado[col].min()),
+            zmax=float(df_filtrado[col].max()),
+            name=var["label"],
+            visible=visivel,
+            text=hover_texto,
+            hoverinfo="text",
+            marker_opacity=0.7,
+            colorbar=dict(
+                title=dict(text=var["label"]),
+                x=1.02,
+                len=0.75
+            )
+        )
+    )
+
+# c. Monta os botões do Dropdown alternando a visibilidade
+
+botoes = []
+total_tracos = len(variaveis)
+
+for i, var in enumerate(variaveis):
+    # Vetor de visibilidade: [True, False, False], [False, True, False], etc.
+    visibilidade = [j == i for j in range(total_tracos)]
+    
+    botoes.append(
+        dict(
+            method="update",
+            label=var["label"],
+            args=[
+                {"visible": visibilidade},  # Alterna os traços
+                {"title.text": f"Distribuição: {var['label']}"}  # Atualiza título opcional
+            ]
+        )
+    )
+
+# d. Configuração final de layout do mapa
+fig_mapa_empsol.update_layout(
+    title=dict(text=f"Distribuição: {variaveis[0]['label']}", x=0.05, y=0.95),
+    map=dict(
+        style="open-street-map",
+        center={"lat": -12.97, "lon": -38.50},
+        zoom=6
+    ),
+    updatemenus=[
+        dict(
+            buttons=botoes,
+            direction="down",
+            showactive=True,
+            x=0.02,
+            xanchor="left",
+            y=0.98,
+            yanchor="top",
+            bgcolor="white",
+            bordercolor="#cccccc"
+        )
+    ],
+    margin={"r": 0, "t": 40, "l": 0, "b": 0}
+)
+
 
 
 
@@ -775,8 +886,8 @@ with aba_educ:
 # ==============================================================================
 
 with aba_ecosol:
-        st.subheader("BPC (%)")
-        st.plotly_chart(fig_mapa_bpc, use_container_width=True)
+        st.subheader("Distribuição de Empreendimentos Econômicos Solidários")
+        st.plotly_chart(fig_mapa_empsol, use_container_width=True)
       
         
 # ==============================================================================
