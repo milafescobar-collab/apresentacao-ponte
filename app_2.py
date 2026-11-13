@@ -886,7 +886,7 @@ with aba_educ:
 with aba_ecosol:
         st.subheader("Distribuição de Empreendimentos Econômicos Solidários")
         total_empsol = df_filtrado['empsol_total'].sum() if 'empsol_total' in df_filtrado.columns else 0
-        st.markdown(f"**Total de Empreendimentos solidários: {total_empsol} **")
+        st.markdown(f"** Total de Empreendimentos solidários: {total_empsol}**")
         st.plotly_chart(fig_mapa_empsol, use_container_width=True)
       
         
