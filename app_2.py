@@ -873,13 +873,13 @@ with aba_economia:
 # CONTEÚDO DA ABA 3: QUALIFICAÇÃO PROFISSIONAL E DADOS DE EDUCAÇÃO
 # ==============================================================================
 
+
 with aba_educ:
         st.subheader("Taxa de Analfabetismo (%)")
+        total_empsol = df_filtrado['empsol_total'].sum() if 'empsol_total' in df_filtrado.columns else 0
+        st.markdown(f"**{total_empsol} Total de Empreendimentos solidários**")
         st.plotly_chart(fig_mapa_edu, use_container_width=True)
       
-
-
-
 
 # ==============================================================================
 # CONTEÚDO DA ABA 5: ECONOMIA SOLIDÁRIA
