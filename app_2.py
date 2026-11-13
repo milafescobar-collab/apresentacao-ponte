@@ -888,9 +888,9 @@ with aba_ecosol:
         total_empsol = df_filtrado['empsol_total'].sum() if 'empsol_total' in df_filtrado.columns else 0
         total_empsol_aprov = df_filtrado['empsol_aprovado'].sum() if 'empsol_aprovado' in df_filtrado.columns else 0
         total_empsol_proc_aprov = df_filtrado['empsol_processo_aprovacao'].sum() if 'empsol_processo_aprovacao' in df_filtrado.columns else 0
-        st.markdown(f"**Total de Empreendimentos solidários: {total_empsol}**")
-        st.markdown(f"**Total de Empreendimentos solidários: {total_empsol_aprov}**")
-        st.markdown(f"**Total de Empreendimentos solidários: {total_empsol_proc_aprov}**")
+        st.markdown(f"**Total: {total_empsol}**")
+        st.markdown(f"**Aprovados: {total_empsol_aprov}**")
+        st.markdown(f"**Em Processo de Aprovação: {total_empsol_proc_aprov}**")
         st.plotly_chart(fig_mapa_empsol, use_container_width=True)
       
         
