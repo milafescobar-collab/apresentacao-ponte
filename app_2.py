@@ -32,7 +32,7 @@ st.markdown(
     """
     <style>
     [data-testid="stImage"] img {
-        height: 250px;
+        height: 300px;
         object-fit: cover;
     }
     </style>
