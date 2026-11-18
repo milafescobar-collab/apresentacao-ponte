@@ -39,7 +39,7 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-st.image("dados/Ponte-Salvador-Itaparica-grande-1024x540.webp", width="stretch")
+st.image("dados/imagem_capa.jpg", width="stretch")
 st.write("---")
 
 
